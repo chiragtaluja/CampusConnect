@@ -2,16 +2,8 @@
 
 
 {% block content %}
-
-<a href="{% url 'add_event' %}">Add Event</a>
-
-<form method="POST" action="{% url 'subscribe' %}">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <button type="submit">Subscribe</button>
-</form>
-
+<hr>
+{% include 'base/newsletter_component.html' %}
 
 
 {% endblock content %}

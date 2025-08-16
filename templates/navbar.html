@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="{% url 'index' %}" role="search" method="GET">
+        <input type="text" name="q" placeholder="Search for Event.." value="{{request.GET.q}}">
+        <button type="submit">Search</button>
+    </form>
+    <hr>
+    <a href="{% url 'add_event' %}">Add Event</a>
+</body>
+
+</html>
