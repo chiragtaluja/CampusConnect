@@ -1,3 +1,5 @@
 django
 python-decouple
 pillow
+django-tailwind
+django-browser-reload
