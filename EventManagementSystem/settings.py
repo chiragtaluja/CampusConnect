@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
     'theme',
-    'tailwind'
+    'tailwind',
 ]
 
 NPM_BIN_PATH = 'npm.cmd'
