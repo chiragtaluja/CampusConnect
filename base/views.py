@@ -99,3 +99,10 @@ def add_event(request):
         return redirect("events_list")
 
     return render(request, "base/add_event.html")
+
+
+def event(request, event_id):
+    event = Event.objects.get(id=event_id)
+    poster = Event.objects.get(id=event_id)
+    context = {"event": event, "poster": poster}
+    return render(request, "base/event_page.html", context)
