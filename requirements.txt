@@ -3,3 +3,4 @@ python-decouple
 pillow
 django-tailwind
 django-browser-reload
+chardet
