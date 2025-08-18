@@ -1,26 +1,46 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <title>New Event: {{ title }}</title>
+    <title>New Event: {{ event.name }}</title>
 </head>
-<body>
-    <h2>{{ title }}</h2>
-    <p><strong>Date:</strong> {{ date }}</p>
-    <p><strong>Venue:</strong> {{ venue }}</p>
-    <p>{{ description }}</p>
 
+<body>
+    <h2>{{ event.name }}</h2>
+    <p><strong>{{ event.headline }}</strong></p>
+    <p><strong>Date:</strong> {{ event.day }} at {{ event.time }}</p>
+    <p><strong>Deadline:</strong> {{ event.deadline }}</p>
+    <p><strong>Venue:</strong> {{ event.venue }}</p>
+    <p><strong>Department:</strong> {{ event.department }}</p>
+    <p><strong>Category:</strong> {{ event.category }}</p>
+    <p><strong>Rules:</strong> {{ event.rules }}</p>
+    <p><strong>Description:</strong> {{ event.description }}</p>
+
+    <p><strong>Coordinator:</strong> {{ event.coordinator_name }}</p>
+    <p><strong>Contact Info:</strong> {{ event.contact_info }}</p>
+
+    {% if event.registration_link %}
     <p>
-        <a href="{{ registration_link }}">
-            Register Here
+        <a href="{{ event.registration_link }}">
+            🔗 Register Here
         </a>
     </p>
+    {% endif %}
+
+    {% if event.whatsapp_link %}
     <p>
-        <a href="{{ whatsapp_link }}">
-            Join WhatsApp Group
+        <a href="{{ event.whatsapp_link }}">
+            💬 Join WhatsApp Group
         </a>
     </p>
+    {% endif %}
+
+    {% if event.poster %}
+    <p>
+        <img src="cid:poster" alt="Event Poster" style="max-width:400px;">
+    </p>
+    {% endif %}
 </body>
+
 </html>

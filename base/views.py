@@ -5,6 +5,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.db.models import Q
+from email.mime.image import MIMEImage
 
 
 def index(request):
@@ -80,23 +81,30 @@ def add_event(request):
         # Get subscribers list
         subscribers = Subscriber.objects.values_list("email", flat=True)
 
-        # Render email template
-        html_content = render_to_string(
-            "emails/event_email.html",
-            {"event": event},  # Pass the entire object instead of each field
-        )
-
         subject = f"🎉 New Event: {event.name}"
         from_email = settings.EMAIL_HOST_USER
 
-        # Send email to all subscribers
         for recipient in subscribers:
+            # Render email template
+            html_content = render_to_string(
+                "emails/event_email.html",
+                {"event": event},  # Pass the entire event object
+            )
+
             msg = EmailMultiAlternatives(subject, "", from_email, [recipient])
             msg.attach_alternative(html_content, "text/html")
-            msg.send()
 
-        messages.success(request, "Event added & emails sent successfully!")
-        return redirect("events_list")
+            # Attach poster inline if it exists
+            if event.poster:
+                with open(event.poster.path, "rb") as f:
+                    img = MIMEImage(f.read())
+                    img.add_header("Content-ID", "<poster>")  # Reference in template
+                    img.add_header(
+                        "Content-Disposition", "inline", filename=event.poster.name
+                    )
+                    msg.attach(img)
+
+            msg.send()
 
     return render(request, "base/add_event.html")
 
@@ -105,4 +113,4 @@ def event(request, event_id):
     event = Event.objects.get(id=event_id)
     poster = Event.objects.get(id=event_id)
     context = {"event": event, "poster": poster}
-    return render(request, "base/event_page.html", context)
+    return render(request, "base/event_detail_page.html", context)

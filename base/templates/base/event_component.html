@@ -1,11 +1,11 @@
 {% for event in events %}
 <div class="event">
-    <a href="{{ event.poster.url }}" target="_blank">
+    <a href="{% url 'event' event.id %}">
         <img src="{{ event.poster.url }}" alt="Event Poster" style="max-width:100px; max-height:100px;">
+        <h2>{{ event.name }}</h2>
+        <p><strong>Day:</strong> {{ event.day }}</p>
+        <p>{{ event.description|truncatewords:10 }}</p>
+        <a href="{% url 'event' event.id %}">Register</a>
     </a>
-    <h2>{{ event.name }}</h2>
-    <p><strong>Day:</strong> {{ event.day }}</p>
-    <p>{{ event.description|truncatewords:10 }}</p>
-    <a href="{% url 'event' event.id %}">Register</a>
 </div>
 {% endfor %}
