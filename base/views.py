@@ -6,8 +6,9 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.db.models import Q
 from email.mime.image import MIMEImage
-
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 def index(request):
     q = request.GET.get("q", "")
     if q:
@@ -40,6 +41,7 @@ def subscribe(request):
     return redirect("index")
 
 
+@login_required(login_url="login")
 def add_event(request):
     if request.method == "POST":
         # Collect form data
@@ -88,12 +90,14 @@ def add_event(request):
             # Render email template
             html_content = render_to_string(
                 "emails/event_email.html",
-                {"event": event}, 
+                {"event": event},
             )
 
-            msg = EmailMultiAlternatives(subject, "", from_email, [], bcc=list(subscribers))
+            msg = EmailMultiAlternatives(
+                subject, "", from_email, [], bcc=list(subscribers)
+            )
             msg.attach_alternative(html_content, "text/html")
-            
+
             # Attach poster inline if it exists
             if event.poster:
                 with open(event.poster.path, "rb") as f:
@@ -115,3 +119,27 @@ def event(request, event_id):
         "event": event,
     }
     return render(request, "base/event_detail_page.html", context)
+
+
+def user_login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("admin_dashboard", admin_id=user.id)
+        else:
+            return render(request, "base/Login_page.html", {"error": "Invalid credentials"})
+    return render(request, "base/Login_page.html")
+
+
+def user_logout(request):
+    logout(request)
+    return redirect("index")
+
+@login_required(login_url="login")
+def admin(request,admin_id):
+    return render(request, "base/Admin_page.html")
