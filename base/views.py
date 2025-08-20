@@ -88,12 +88,12 @@ def add_event(request):
             # Render email template
             html_content = render_to_string(
                 "emails/event_email.html",
-                {"event": event},  # Pass the entire event object
+                {"event": event}, 
             )
 
-            msg = EmailMultiAlternatives(subject, "", from_email, [recipient])
+            msg = EmailMultiAlternatives(subject, "", from_email, [], bcc=list(subscribers))
             msg.attach_alternative(html_content, "text/html")
-
+            
             # Attach poster inline if it exists
             if event.poster:
                 with open(event.poster.path, "rb") as f:
@@ -111,6 +111,7 @@ def add_event(request):
 
 def event(request, event_id):
     event = Event.objects.get(id=event_id)
-    poster = Event.objects.get(id=event_id)
-    context = {"event": event, "poster": poster}
+    context = {
+        "event": event,
+    }
     return render(request, "base/event_detail_page.html", context)
