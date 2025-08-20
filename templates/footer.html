@@ -3,26 +3,22 @@
 
 
 <footer class="bg-black border-gray-200 pt-12 px-8">
-      <div class="flex max-[1200px]:flex-col gap-x-16 gap-y-12">
+
+      <div class=" border-2 border-white flex max-[1200px]:flex-col gap-x-16 gap-y-12">
         <div class="w-full max-w-sm">
           <div class="mb-6">
             <a href="javascript:void(0)">
-              <img src="{% static 'base/assets/img/LOGO-1.png' %}" alt="mmdu logo" class="w-36" />
+              <img src="{% static 'base/assets/img/LOGO-1.png' %}" alt="mmdu logo" class="w-[150px] h-[50px]" />
             </a>
           </div>
           <!--Newsletter-->
-          <h4 class="text-sm font-medium text-white">Stay Connected: Join our event newsletter.</h4>
-          <form action="{% url 'subscribe' %}" method="post" class="flex items-center mt-4 border border-gray-300 px-4 py-2.5 rounded hover:border-red-600 focus-within:border-red-600">
-            {% csrf_token %}
-            <input type="email" placeholder="Enter your email" class="flex-1 text-white outline-none bg-transparent text-sm" />
-            <button type="submit" class="flex-none rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:text-black shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Notify me</button>
-          </form>
+          
 
         </div>
 
-        <div class="w-full ml-10 ">
+        <div class="w-full border-2 border-white ml-10 ">
           
-            <ul class='space-y-4 w-full grid grid-cols-2 md:grid-cols-3  gap-x-6 gap-y-8'>
+            <ul class='space-y-1 w-full grid grid-cols-2 md:grid-cols-3 gap-y-1'>
               <li><a href="javascript:void(0)" class="text-sm text-white hover:text-red-600">Home</a></li>
               <li><a href="javascript:void(0)" class="text-sm text-white hover:text-red-600">About US</a></li>
               <li><a href="javascript:void(0)" class="text-sm text-white hover:text-red-600">Event</a></li>
@@ -34,10 +30,19 @@
         </div>
 
           
+        <h4 class="text-sm font-medium text-white">Stay Connected: Join our event newsletter.</h4>
+          <form action="{% url 'subscribe' %}" method="post" class="flex items-center mt-4 border border-gray-300 px-4 py-2.5 rounded hover:border-red-600 focus-within:border-red-600">
+            {% csrf_token %}
+            <input type="email" placeholder="Enter your email" class="flex-1 text-white outline-none bg-transparent text-sm" />
+            <button type="submit" class="flex-none rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white hover:text-black shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Notify me</button>
+          </form>
         </div>
+
+
+        
       </div>
 
-      <div class="mt-12 border-t border-gray-300 py-6">
-        <p class="text-sm text-white text-center">© 2025 MMDU events page. All Rights Reserved.</p>
+      <div class="mt-12 border-2 border-gray-300 py-2">
+        <p class="text-sm text-white text-left">© 2025 MMDU events page.</p>
       </div>
     </footer>
