@@ -78,6 +78,7 @@ def add_event(request):
             registration_link=registration_link,
             whatsapp_link=whatsapp_link,
             poster=poster,
+            created_by=request.user,
         )
 
         subscribers = Subscriber.objects.values_list("email", flat=True)
