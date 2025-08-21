@@ -87,7 +87,7 @@
   </nav>
 
   <!-- search bar -->
-
+  <form action="{% url 'index' %}" method="GET">
   <div class="search-form mt-5 max-h-0 opacity-0 overflow-hidden flex items-center space-x-4 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24 
   transform transition-all duration-500 ease-in-out">
   <div class="flex bg-gray-200 p-2 w-full space-x-2 rounded-lg items-center">
@@ -98,9 +98,15 @@
     </svg>
     <input
       class="w-full bg-gray-50 outline-none border-transparent focus:border-transparent focus:ring-0 rounded-lg text-sm sm:text-base"
-      type="text" placeholder="Animal name or keyword..." />
+      name="q"
+      value="{{ request.GET.q }}"
+      type="text" placeholder="Search for event" />
+      <button type="submit">Search</button>
+
   </div>
+</from>
 </div>
+
 
 </navbar>
 
