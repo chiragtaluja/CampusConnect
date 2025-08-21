@@ -1,5 +1,4 @@
-{% extends "main.html" %}
-{% block content %}
+
 
 <form method="POST" action="{% url 'add_event' %}" enctype="multipart/form-data">
     {% csrf_token %}
@@ -90,4 +89,3 @@
     <button type="submit">Add Event</button>
 </form>
 
-{% endblock content %}

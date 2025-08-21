@@ -8,7 +8,8 @@ from django.db.models import Q
 from email.mime.image import MIMEImage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+
+
 def index(request):
     q = request.GET.get("q", "")
     if q:
@@ -41,7 +42,7 @@ def subscribe(request):
     return redirect("index")
 
 
-@login_required(login_url="login")
+@login_required(login_url="user_login")
 def add_event(request):
     if request.method == "POST":
         # Collect form data
@@ -59,9 +60,8 @@ def add_event(request):
         contact_info = request.POST.get("contact_info")
         registration_link = request.POST.get("registration_link")
         whatsapp_link = request.POST.get("whatsapp_link")
-        poster = request.FILES.get("poster")  # Handle file upload
+        poster = request.FILES.get("poster")
 
-        # Save Event
         event = Event.objects.create(
             name=name,
             headline=headline,
@@ -80,35 +80,29 @@ def add_event(request):
             poster=poster,
         )
 
-        # Get subscribers list
         subscribers = Subscriber.objects.values_list("email", flat=True)
 
         subject = f"🎉 New Event: {event.name}"
         from_email = settings.EMAIL_HOST_USER
 
-        for recipient in subscribers:
-            # Render email template
-            html_content = render_to_string(
-                "emails/event_email.html",
-                {"event": event},
-            )
+        html_content = render_to_string(
+            "emails/event_email.html",
+            {"event": event},
+        )
 
-            msg = EmailMultiAlternatives(
-                subject, "", from_email, [], bcc=list(subscribers)
-            )
-            msg.attach_alternative(html_content, "text/html")
+        msg = EmailMultiAlternatives(subject, "", from_email, [], bcc=list(subscribers))
+        msg.attach_alternative(html_content, "text/html")
 
-            # Attach poster inline if it exists
-            if event.poster:
-                with open(event.poster.path, "rb") as f:
-                    img = MIMEImage(f.read())
-                    img.add_header("Content-ID", "<poster>")  # Reference in template
-                    img.add_header(
-                        "Content-Disposition", "inline", filename=event.poster.name
-                    )
-                    msg.attach(img)
+        if event.poster:
+            with open(event.poster.path, "rb") as f:
+                img = MIMEImage(f.read())
+                img.add_header("Content-ID", "<poster>")  # Reference in template
+                img.add_header(
+                    "Content-Disposition", "inline", filename=event.poster.name
+                )
+                msg.attach(img)
 
-            msg.send()
+        msg.send()
 
     return render(request, "base/add_event.html")
 
@@ -132,7 +126,9 @@ def user_login(request):
             login(request, user)
             return redirect("admin_dashboard", admin_id=user.id)
         else:
-            return render(request, "base/Login_page.html", {"error": "Invalid credentials"})
+            return render(
+                request, "base/Login_page.html", {"error": "Invalid credentials"}
+            )
     return render(request, "base/Login_page.html")
 
 
@@ -140,6 +136,7 @@ def user_logout(request):
     logout(request)
     return redirect("index")
 
-@login_required(login_url="login")
-def admin(request,admin_id):
+
+@login_required(login_url="user_login")
+def admin_dashboard(request, admin_id):
     return render(request, "base/Admin_page.html")
