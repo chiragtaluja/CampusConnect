@@ -78,6 +78,7 @@ def add_event(request):
             registration_link=registration_link,
             whatsapp_link=whatsapp_link,
             poster=poster,
+            created_by=request.user,
         )
 
         subscribers = Subscriber.objects.values_list("email", flat=True)
@@ -139,4 +140,8 @@ def user_logout(request):
 
 @login_required(login_url="user_login")
 def admin_dashboard(request, admin_id):
-    return render(request, "base/Admin_page.html")
+    events=Event.objects.filter(created_by=request.user)
+    context={
+        "events":events,
+    }
+    return render(request, "base/Admin_page.html", context)
