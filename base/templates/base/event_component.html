@@ -2,15 +2,6 @@
 
 {% load static tailwind_tags %}
 {% load static %}
-<!-- <div class="event">
-    <a href="{% url 'event' event.id %}">
-        <img src="{{ event.poster.url }}" alt="Event Poster" style="max-width:100px; max-height:100px;">
-        <h2>{{ event.name }}</h2>
-        <p><strong>Day:</strong> {{ event.day }}</p>
-        <p>{{ event.description|truncatewords:10 }}</p>
-        <a href="{% url 'event' event.id %}">Register</a>
-    </a>
-</div> -->
 
 <ul class="event grid grid-cols-1 mx-10 mt-5 rounded-2xl bg-gray-100  gap-y-10 gap-x-6 items-start p-8">
     <li class="relative flex flex-col sm:flex-row  items-start">

@@ -117,6 +117,9 @@ def event(request, event_id):
 
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect("admin_dashboard", admin_id=request.user.id)
+     
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
