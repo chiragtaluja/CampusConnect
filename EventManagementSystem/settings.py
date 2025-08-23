@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'tailwind',
     'theme'
+    
 ]
 
 TAILWIND_APP_NAME = 'theme'

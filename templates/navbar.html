@@ -2,10 +2,10 @@
 {% load static %}
 
 
-<navbar class="w-full min-h-screen  text-gray-900 bg-gradient-to-br  from-transparent to-yellow-100">
+<navbar class="w-full   text-gray-900 bg-gradient-to-br  from-transparent to-yellow-100">
 
   <nav
-    class="flex justify-between bg-black rounded-2xl border-5 border-white  items-center py-2 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24">
+    class="flex justify-between bg-black rounded-2xl border-5 border-white  items-center py-2 mx-auto md:px-12 lg:px-16 xl:px-24">
 
     <button
       class="sidebar-open block md:hidden ml-10 mt-5  relative z-30 focus:outline-none transform  -translate-x-1/2 -translate-y-1/2 active:scale-75 transition-transform">
@@ -59,6 +59,11 @@
 
       </ul>
     </div>
+<button class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4  border-red-600 hover:border-red-500 rounded cursor-pointer max-md:mr-5   font-medium whitespace-nowrap
+     shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500 focus:outline-none block md:hidden">
+  Add Event
+</button>
+
     {% else %}
     <!-- menu -->
     <div
