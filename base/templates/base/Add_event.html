@@ -1,6 +1,10 @@
+{% load static tailwind_tags %}
+{% load static %}
+<link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
 
 
-<form method="POST" action="{% url 'add_event' %}" enctype="multipart/form-data">
+<div class="">
+    <form method="POST" action="{% url 'add_event' %}" enctype="multipart/form-data " class="bg-gray-300 ">
     {% csrf_token %}
 
     <!-- Event Name -->
@@ -89,3 +93,5 @@
     <button type="submit">Add Event</button>
 </form>
 
+
+</div>
