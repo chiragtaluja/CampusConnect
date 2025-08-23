@@ -1,8 +1,10 @@
-
-<h1>hello {{ request.user.firstname }}</h1>
+{% extends 'main.html' %}
+{% block content %}
+<h1>hello {{ request.user.first_name }}</h1>
 
 <hr>
 {% include 'base/event_component.html' %}
 <hr>
-<a href="{% url 'add_event' %}">Add Event</a>
-<a href="{% url 'logout' %}">Logout</a>
+
+
+{% endblock content%}

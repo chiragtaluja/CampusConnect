@@ -4,12 +4,14 @@
 
 <navbar class="w-full min-h-screen  text-gray-900 bg-gradient-to-br  from-transparent to-yellow-100">
 
-  <nav class="flex justify-between bg-black rounded-2xl border-5 border-white  items-center py-2 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24">
-  
+  <nav
+    class="flex justify-between bg-black rounded-2xl border-5 border-white  items-center py-2 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24">
+
     <button
       class="sidebar-open block md:hidden ml-10 mt-5  relative z-30 focus:outline-none transform  -translate-x-1/2 -translate-y-1/2 active:scale-75 transition-transform">
-      <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-500 btn-open h-5 w-5 transform transition duration-500 ease-in-out"
-        viewBox="0 0 20 20" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg"
+        class="text-gray-500 btn-open h-5 w-5 transform transition duration-500 ease-in-out" viewBox="0 0 20 20"
+        fill="currentColor">
         <path fill-rule="evenodd"
           d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
           clip-rule="evenodd" />
@@ -23,12 +25,41 @@
       </svg>
     </button>
 
-<!-- logo -->
-    <a href="javascript:void(0)" class=" "><img src="{% static 'base/assets/img/Navbar-logo.png' %}" alt="logo" class='w-[200px] h-[60px] ' />
-        </a>
-        <a href="javascript:void(0)" class="hidden "><img src="{% static 'base/assets/img/logo-short.jpeg' %}" alt="logo" class='w-8' />
+    <!-- logo -->
+    <a href="javascript:void(0)" class=" "><img src="{% static 'base/assets/img/Navbar-logo.png' %}" alt="logo"
+        class='w-[200px] h-[60px] ' />
+    </a>
+    <a href="javascript:void(0)" class="hidden "><img src="{% static 'base/assets/img/logo-short.jpeg' %}" alt="logo"
+        class='w-8' />
     </a>
 
+    {% if request.user.is_authenticated %}
+    <div
+      class="menu-resposive hidden fixed flex inset-0 transition-all bg-black/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 ">
+      <ul class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
+        <li class="text-lg md:text-base lg:text-lg font-medium group text-red-600">
+          <a href="{% url 'add_event' %}">Add Event</a>
+          <div
+            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+          </div>
+        </li>
+        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+          <a href="{% url 'index' %}">Student View
+          </a>
+          <div
+            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+          </div>
+        </li>
+        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+          <a href="{% url 'logout' %}">Logout</a>
+          <div
+            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+          </div>
+        </li>
+
+      </ul>
+    </div>
+    {% else %}
     <!-- menu -->
     <div
       class="menu-resposive hidden fixed flex inset-0 transition-all bg-black/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 ">
@@ -72,7 +103,7 @@
     </div>
 
 
-    
+
 
     <!-- search -->
 
@@ -84,28 +115,28 @@
           clip-rule="evenodd" />
       </svg>
     </button>
+    {% endif %}
   </nav>
 
   <!-- search bar -->
   <form action="{% url 'index' %}" method="GET">
-  <div class="search-form mt-5 max-h-0 opacity-0 overflow-hidden flex items-center space-x-4 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24 
+    <div class="search-form mt-5 max-h-0 opacity-0 overflow-hidden flex items-center space-x-4 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24 
   transform transition-all duration-500 ease-in-out">
-  <div class="flex bg-gray-200 p-2 w-full space-x-2 rounded-lg items-center">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-75 ml-4" fill="none" viewBox="0 0 24 24"
-      stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-    </svg>
-    <input
-      class="w-full bg-gray-50 outline-none border-transparent focus:border-transparent focus:ring-0 rounded-lg text-sm sm:text-base"
-      name="q"
-      value="{{ request.GET.q }}"
-      type="text" placeholder="Search for event" />
-      <button type="submit">Search</button>
+      <div class="flex bg-gray-200 p-2 w-full space-x-2 rounded-lg items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-75 ml-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          class="w-full bg-gray-50 outline-none border-transparent focus:border-transparent focus:ring-0 rounded-lg text-sm sm:text-base"
+          name="q" value="{{ request.GET.q }}" type="text" placeholder="Search for event" />
+        <button type="submit">Search</button>
 
-  </div>
-</from>
-</div>
+      </div>
+    </div>
+  </form>
+
 
 
 </navbar>
