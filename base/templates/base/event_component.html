@@ -21,6 +21,9 @@
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M0 0L3 3L0 6"></path>
                 </svg></a>
+                {% if request.user == event.created_by %}
+                <a href="">Edit Event</a>
+                {% endif %}
         </div>
         <img src="{{ event.poster.url }}" alt="" class="mb-6 shadow-md rounded-lg bg-slate-50 w-[10rem] sm:w-[17rem] md:max-h-[200px] max-h-[200px] self-center sm:mb-0 ">
          </a>
