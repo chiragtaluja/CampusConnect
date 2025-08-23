@@ -15,7 +15,6 @@
 <body >
     <form method="POST" action="{% url 'subscribe' %}">
     {% csrf_token %}
-    <input type="text"  name="name" placeholder="Your Name" >
     <input type="email" name="email" placeholder="Your Email" >
     <button type="submit">Subscribe</button>
     

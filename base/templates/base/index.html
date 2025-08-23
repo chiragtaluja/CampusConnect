@@ -2,12 +2,10 @@
 
 
 {% block content %}
-
+<h2>Upcoming Events</h2>
 {% include 'base/event_component.html' %}
+<a href="{% url 'upcoming_events' %}">See all Events</a>
 <hr>
-
-
-{% include 'base/newsletter_component.html' %}
-<hr>
+<h2>Past Events</h2>
 
 {% endblock content %}

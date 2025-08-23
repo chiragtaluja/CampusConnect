@@ -10,8 +10,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 
+from django.shortcuts import render
+from django.db.models import Q
+from .models import Event
+
+
 def index(request):
     q = request.GET.get("q", "")
+
     if q:
         events = Event.objects.filter(
             Q(department__icontains=q)
@@ -20,23 +26,23 @@ def index(request):
             | Q(name__icontains=q)
         )
     else:
-        events = Event.objects.all()
-    context = {
-        "events": events,
-    }
+        events = Event.objects.order_by("-created_at")[:3]  # latest 3
 
-    return render(request, "base/index.html", context)
+    return render(request, "base/index.html", {"events": events})
 
 
 def subscribe(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
+        email = request.POST.get("email", "").strip()  # make sure it’s a string
+
+        if not email:  # no email entered
+            messages.error(request, "Please enter a valid email address.")
+            return redirect("index")
 
         if Subscriber.objects.filter(email=email).exists():
             messages.warning(request, "You are already subscribed.")
         else:
-            Subscriber.objects.create(name=name, email=email)
+            Subscriber.objects.create(email=email)
             messages.success(request, "Subscription successful!")
 
     return redirect("index")
@@ -119,7 +125,7 @@ def event(request, event_id):
 def user_login(request):
     if request.user.is_authenticated:
         return redirect("admin_dashboard", admin_id=request.user.id)
-     
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -143,8 +149,20 @@ def user_logout(request):
 
 @login_required(login_url="user_login")
 def admin_dashboard(request, admin_id):
-    events=Event.objects.filter(created_by=request.user)
-    context={
-        "events":events,
+    events = Event.objects.filter(created_by=request.user)
+    context = {
+        "events": events,
     }
     return render(request, "base/Admin_page.html", context)
+
+
+def about_us(request):
+    return render(request, "base/about_us.html")
+
+
+def upcoming_events(request):
+    events = Event.objects.all().order_by("-created_at")
+    context = {
+        "events": events,
+    }
+    return render(request, "base/upcoming_events.html", context)
