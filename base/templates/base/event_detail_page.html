@@ -1,17 +1,29 @@
 {% extends "main.html" %}
 
 {% block content %}
-<div class="event-detail flex flex-col">
+{% load static tailwind_tags %}
+{% load static %}
 
-    {% if event.poster %}
-    <div>
-        <img src="{{ event.poster.url }}" alt="{{ event.name }}">
+<link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+
+<div class="event-detail flex flex-col ">
+
+    <div class="w-full flex flex-col items-center justify-center">
+        <h1 class="">{{ event.name }}</h1>
+        <h3>{{ event.headline }}</h3>
+        <div class="flex">
+            <p class="border-r-2 p-5 ml-5   ">{{ event.day }}</p>
+            <p class="text-[10px] ml-5 text-red-600 py-5 ">Maharishi Markandeshwar University <br> Mullana,Ambala,Haryana          </p>
+        </div>
     </div>
-    {% endif %}
+    
+     <h3>{{ event.headline }}</h3>
+    <p>{{ event.description }}</p>
 
-    <h1 class="">{{ event.name }}</h1>
-    <h3>{{ event.headline }}</h3>
+    <h4>Rules & Regulations</h4>
+    <p>{{ event.rules }}</p>
     <hr>
+
 
     <p><strong>Day:</strong> {{ event.day }}</p>
     <p><strong>Time:</strong> {{ event.time }}</p>
@@ -20,22 +32,21 @@
     <p><strong>Department:</strong> {{ event.department }}</p>
     <p><strong>Category:</strong> {{ event.category }}</p>
 
-    <p><strong>Coordinator:</strong> {{ event.coordinator_name }}</p>
-    <p><strong>Contact Info:</strong> {{ event.contact_info }}</p>
-
-    <h4>Description</h4>
-    <p>{{ event.description }}</p>
-
-    <h4>Rules</h4>
-    <p>{{ event.rules }}</p>
-
     {% if event.registration_link %}
+    
     <p><a href="{{ event.registration_link }}" target="_blank">Register Here</a></p>
     {% endif %}
 
     {% if event.whatsapp_link %}
     <p><a href="{{ event.whatsapp_link }}" target="_blank">Join WhatsApp Group</a></p>
     {% endif %}
+
+    <p><strong>Coordinator:</strong> {{ event.coordinator_name }}</p>
+    <p><strong>Contact Info:</strong> {{ event.contact_info }}</p>
+
+    
+
+    
 
     <p>{{ event.created_by }}</p>
 </div>
