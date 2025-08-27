@@ -1,97 +1,105 @@
-{% load static tailwind_tags %}
+{% extends 'main.html' %}
+% load static tailwind_tags %}
 {% load static %}
+
+
+{% block content %}
+
+
 <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
 
 
 <div class="">
     <form method="POST" action="{% url 'add_event' %}" enctype="multipart/form-data " class="bg-gray-300 ">
-    {% csrf_token %}
+        {% csrf_token %}
 
-    <!-- Event Name -->
-    <input type="text" name="name" placeholder="Event Name" required>
-    <hr>
+        <!-- Event Name -->
+        <input type="text" name="name" placeholder="Event Name" required>
+        <hr>
 
-    <!-- Headline -->
-    <input type="text" name="headline" placeholder="Event Headline / Tagline" required>
-    <hr>
+        <!-- Headline -->
+        <input type="text" name="headline" placeholder="Event Headline / Tagline" required>
+        <hr>
 
-    <!-- Day -->
-    <label>Event Date:</label>
-    <input type="date" name="day" required>
-    <hr>
+        <!-- Day -->
+        <label>Event Date:</label>
+        <input type="date" name="day" required>
+        <hr>
 
-    <!-- Time -->
-    <label>Event Time:</label>
-    <input type="time" name="time" required>
-    <hr>
+        <!-- Time -->
+        <label>Event Time:</label>
+        <input type="time" name="time" required>
+        <hr>
 
-    <!-- Deadline -->
-    <label>Registration Deadline:</label>
-    <input type="datetime-local" name="deadline" required>
-    <hr>
+        <!-- Deadline -->
+        <label>Registration Deadline:</label>
+        <input type="datetime-local" name="deadline" required>
+        <hr>
 
-    <!-- Rules -->
-    <textarea name="rules" placeholder="Rules & Regulations" required></textarea>
-    <hr>
+        <!-- Rules -->
+        <textarea name="rules" placeholder="Rules & Regulations" required></textarea>
+        <hr>
 
-    <!-- Description -->
-    <textarea name="description" placeholder="Event Description (min 300 words)" required></textarea>
-    <hr>
+        <!-- Description -->
+        <textarea name="description" placeholder="Event Description (min 300 words)" required></textarea>
+        <hr>
 
-    <!-- Venue -->
-    <input type="text" name="venue" placeholder="Venue" required>
-    <hr>
+        <!-- Venue -->
+        <input type="text" name="venue" placeholder="Venue" required>
+        <hr>
 
-    <!-- Department Dropdown -->
-    <label>Department:</label>
-    <select name="department" required>
-        <option value="">-- Select Department --</option>
-        <option value="CSE">Computer Science & Engineering</option>
-        <option value="IT">Information Technology</option>
-        <option value="ECE">Electronics & Communication</option>
-        <option value="EEE">Electrical & Electronics</option>
-        <option value="ME">Mechanical</option>
-        <option value="CE">Civil</option>
-        <option value="BCA">Bachelor of Computer Applications</option>
-        <option value="MBA">Master of Business Administration</option>
-    </select>
-    <hr>
+        <!-- Department Dropdown -->
+        <label>Department:</label>
+        <select name="department" required>
+            <option value="">-- Select Department --</option>
+            <option value="CSE">Computer Science & Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="ECE">Electronics & Communication</option>
+            <option value="EEE">Electrical & Electronics</option>
+            <option value="ME">Mechanical</option>
+            <option value="CE">Civil</option>
+            <option value="BCA">Bachelor of Computer Applications</option>
+            <option value="MBA">Master of Business Administration</option>
+        </select>
+        <hr>
 
-    <!-- Category Dropdown -->
-    <label>Category:</label>
-    <select name="category" required>
-        <option value="">-- Select Category --</option>
-        <option value="Technical">Technical</option>
-        <option value="Cultural">Cultural</option>
-        <option value="Sports">Sports</option>
-        <option value="Workshop">Workshop</option>
-        <option value="Seminar">Seminar</option>
-    </select>
-    <hr>
+        <!-- Category Dropdown -->
+        <label>Category:</label>
+        <select name="category" required>
+            <option value="">-- Select Category --</option>
+            <option value="Technical">Technical</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Sports">Sports</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Seminar">Seminar</option>
+        </select>
+        <hr>
 
-    <!-- Coordinator Name -->
-    <input type="text" name="coordinator_name" placeholder="Coordinator Name" required>
-    <hr>
+        <!-- Coordinator Name -->
+        <input type="text" name="coordinator_name" placeholder="Coordinator Name" required>
+        <hr>
 
-    <!-- Contact Info -->
-    <input type="text" name="contact_info" placeholder="Coordinator Contact Info (Phone/Email)" required>
-    <hr>
+        <!-- Contact Info -->
+        <input type="text" name="contact_info" placeholder="Coordinator Contact Info (Phone/Email)" required>
+        <hr>
 
-    <!-- Registration & WhatsApp Links -->
-    <input type="url" name="registration_link" placeholder="Google Form Registration Link">
-    <hr>
+        <!-- Registration & WhatsApp Links -->
+        <input type="url" name="registration_link" placeholder="Google Form Registration Link">
+        <hr>
 
-    <input type="url" name="whatsapp_link" placeholder="WhatsApp Group Link">
-    <hr>
+        <input type="url" name="whatsapp_link" placeholder="WhatsApp Group Link">
+        <hr>
 
-    <!-- Poster Upload -->
-    <label>Upload Event Poster:</label>
-    <input type="file" name="poster" accept="image/*">
-    <hr>
+        <!-- Poster Upload -->
+        <label>Upload Event Poster:</label>
+        <input type="file" name="poster" accept="image/*">
+        <hr>
 
-    <!-- Submit Button -->
-    <button type="submit">Add Event</button>
-</form>
+        <!-- Submit Button -->
+        <button type="submit">Add Event</button>
+    </form>
 
 
 </div>
+
+{% endblock %}
