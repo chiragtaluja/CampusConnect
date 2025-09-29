@@ -25,7 +25,14 @@
                 <a href="">Edit Event</a>
                 {% endif %}
         </div>
-        <img src="{{ event.poster.url }}" alt="" class="mb-6 shadow-md rounded-lg bg-slate-50 w-[10rem] sm:w-[17rem] md:max-h-[200px] max-h-[200px] self-center sm:mb-0 ">
+       {% if event.poster %}
+    <img src="{{ event.poster.url }}" alt="Event Poster" 
+         class="mb-6 shadow-md rounded-lg bg-slate-50 w-[10rem] sm:w-[17rem] md:max-h-[200px] max-h-[200px] self-center sm:mb-0">
+{% else %}
+    <img src="{% static 'images/default-poster.jpg' %}" alt="Default Poster" 
+         class="mb-6 shadow-md rounded-lg bg-slate-50 w-[10rem] sm:w-[17rem] md:max-h-[200px] max-h-[200px] self-center sm:mb-0">
+{% endif %}
+
          </a>
     </li>
     
