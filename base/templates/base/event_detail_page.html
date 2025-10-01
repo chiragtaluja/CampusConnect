@@ -17,32 +17,55 @@
         </div>
     </div>
     
-     <h3>{{ event.headline }}</h3>
+<div class="flex flex-col mx-10 mt-5 gap-2">
+    <h3 class="font-bold text-lg">{{ event.headline }}</h3>
     <p>{{ event.description }}</p>
 
-    <h4>Rules & Regulations</h4>
+    <h3 class="font-bold text-lg " >Rules & Regulations</h3>
     <p>{{ event.rules }}</p>
-    <hr>
+    <hr class="text-gray-500">
 
-
-    <p><strong>Day:</strong> {{ event.day }}</p>
+    <p><strong>Venue:</strong> {{ event.venue }}</p>
+    <p><strong>Date:</strong> {{ event.day }}</p>
     <p><strong>Time:</strong> {{ event.time }}</p>
     <p><strong>Deadline:</strong> {{ event.deadline }}</p>
-    <p><strong>Venue:</strong> {{ event.venue }}</p>
-    <p><strong>Department:</strong> {{ event.department }}</p>
-    <p><strong>Category:</strong> {{ event.category }}</p>
+    
+    <p><strong>Organised by:</strong> {{ event.department }}</p>
+    <p><strong>Event Category:</strong> {{ event.category }}</p>
+
+    <hr class="text-gray-500">
 
     {% if event.registration_link %}
     
-    <p><a href="{{ event.registration_link }}" target="_blank">Register Here</a></p>
+    
+
+
+    <a href="{{ event.registration_link }}" target="_blank">
+        <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-500 text-red-500 hover:border-red-400 hover:text-red-400 focus:outline-hidden focus:border-red-400 focus:text-red-400 disabled:opacity-50 disabled:pointer-events-none">
+         Register Here
+        </button>
+    </a>
     {% endif %}
 
     {% if event.whatsapp_link %}
-    <p><a href="{{ event.whatsapp_link }}" target="_blank">Join WhatsApp Group</a></p>
+    <div class="flex gap-0.5">
+        <p class="text-[10px] mt-2  w-fit">
+        For more details about the event, join the <p class="text-red-600 text-[10px]  w-fit mt-2">WhatsApp group.</p>
+    </p>
+    </div>
+    
+
+    <a href="{{ event.whatsapp_link }}" target="_blank"><button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-red-500 text-red-500 hover:border-red-400 hover:text-red-400 focus:outline-hidden focus:border-red-400 focus:text-red-400 disabled:opacity-50 disabled:pointer-events-none">
+         Join WhatsApp Group
+        </button></a>
     {% endif %}
 
-    <p><strong>Coordinator:</strong> {{ event.coordinator_name }}</p>
+    <hr class="text-gray-500">
+    <h3 class="font-bold text-lg">Coordinators Details</h3>
+    <p><strong>Coordinator Name:</strong> {{ event.coordinator_name }}</p>
     <p><strong>Contact Info:</strong> {{ event.contact_info }}</p>
+
+    </div>
 
     
 
