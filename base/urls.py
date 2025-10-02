@@ -10,5 +10,6 @@ urlpatterns = [
     path("admin_dashboard/<int:admin_id>/", views.admin_dashboard, name="admin_dashboard"),
     path("logout/", views.user_logout, name="logout"),
     path("about_us/", views.about_us, name="about_us"),
-    path("upcoming_events/", views.upcoming_events, name="upcoming_events")
+    path("upcoming_events/", views.upcoming_events, name="upcoming_events"),
+    path("past_events/", views.past_events, name="past_events"),
 ]

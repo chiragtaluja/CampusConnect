@@ -8,6 +8,7 @@ from django.db.models import Q
 from email.mime.image import MIMEImage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from datetime import date
 
 
 from django.shortcuts import render
@@ -17,16 +18,18 @@ from .models import Event
 
 def index(request):
     q = request.GET.get("q", "")
+    today = date.today()
 
     if q:
         events = Event.objects.filter(
             Q(department__icontains=q)
             | Q(category__icontains=q)
             | Q(coordinator_name__icontains=q)
-            | Q(name__icontains=q)
-        )
+            | Q(name__icontains=q),
+            day__gte=today  
+        ).order_by("day")
     else:
-        events = Event.objects.order_by("-created_at")[:3]  # latest 3
+        events = Event.objects.filter(day__gte=today).order_by("day")[:3]  
 
     return render(request, "base/index.html", {"events": events})
 
@@ -161,8 +164,18 @@ def about_us(request):
 
 
 def upcoming_events(request):
-    events = Event.objects.all().order_by("-created_at")
+    today = date.today()
+    events = Event.objects.filter(day__gte=today).order_by("day")
     context = {
         "events": events,
     }
     return render(request, "base/upcoming_events.html", context)
+
+
+def past_events(request):
+    today = date.today()
+    events = Event.objects.filter(day__lt=today).order_by("-day")
+    context = {
+        "events": events,
+    }
+    return render(request, "base/past_events.html", context)
