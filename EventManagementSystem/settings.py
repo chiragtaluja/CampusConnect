@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 ]
 
 TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = 'npm.cmd'
+NPM_BIN_PATH = '/Users/bhavyadhawan/.nvm/versions/node/v22.20.0/bin/npm'
 
 if DEBUG:
     # Add django_browser_reload only in DEBUG mode
