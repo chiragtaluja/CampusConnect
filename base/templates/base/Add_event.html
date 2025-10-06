@@ -10,96 +10,61 @@
 
 
 <div class="">
-    <form method="POST" action="{% url 'add_event' %}" enctype="multipart/form-data " class="bg-gray-300 ">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-
-        <!-- Event Name -->
-        <input type="text" name="name" placeholder="Event Name" required>
+        <label>Event Name:</label>
+        <input type="text" name="name" value="{{ event.name|default:'' }}" required><br>
         <hr>
-
-        <!-- Headline -->
-        <input type="text" name="headline" placeholder="Event Headline / Tagline" required>
+        <label>Headline:</label>
+        <input type="text" name="headline" value="{{ event.headline|default:'' }}" required><br>
         <hr>
-
-        <!-- Day -->
-        <label>Event Date:</label>
-        <input type="date" name="day" required>
+        <label>Day:</label>
+        <input type="date" name="day" value="{{ event.day|date:'Y-m-d' }}"><br>
         <hr>
-
-        <!-- Time -->
-        <label>Event Time:</label>
-        <input type="time" name="time" required>
+        <label>Time:</label>
+        <input type="time" name="time" value="{{ event.time|time:'H:i' }}"><br>
         <hr>
-
-        <!-- Deadline -->
-        <label>Registration Deadline:</label>
-        <input type="datetime-local" name="deadline" required>
+        <label>Deadline:</label>
+        <input type="date" name="deadline" value="{{ event.deadline|date:'Y-m-d' }}"><br>
         <hr>
-
-        <!-- Rules -->
-        <textarea name="rules" placeholder="Rules & Regulations" required></textarea>
+        <label>Rules:</label>
+        <textarea name="rules">{{ event.rules|default:'' }}</textarea><br>
         <hr>
-
-        <!-- Description -->
-        <textarea name="description" placeholder="Event Description (min 300 words)" required></textarea>
+        <label>Description:</label>
+        <textarea name="description">{{ event.description|default:'' }}</textarea><br>
         <hr>
-
-        <!-- Venue -->
-        <input type="text" name="venue" placeholder="Venue" required>
+        <label>Venue:</label>
+        <input type="text" name="venue" value="{{ event.venue|default:'' }}"><br>
         <hr>
-
-        <!-- Department Dropdown -->
         <label>Department:</label>
-        <select name="department" required>
-            <option value="">-- Select Department --</option>
-            <option value="CSE">Computer Science & Engineering</option>
-            <option value="IT">Information Technology</option>
-            <option value="ECE">Electronics & Communication</option>
-            <option value="EEE">Electrical & Electronics</option>
-            <option value="ME">Mechanical</option>
-            <option value="CE">Civil</option>
-            <option value="BCA">Bachelor of Computer Applications</option>
-            <option value="MBA">Master of Business Administration</option>
-        </select>
+        <input type="text" name="department" value="{{ event.department|default:'' }}"><br>
         <hr>
-
-        <!-- Category Dropdown -->
         <label>Category:</label>
-        <select name="category" required>
-            <option value="">-- Select Category --</option>
-            <option value="Technical">Technical</option>
-            <option value="Cultural">Cultural</option>
-            <option value="Sports">Sports</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Seminar">Seminar</option>
-        </select>
+        <input type="text" name="category" value="{{ event.category|default:'' }}"><br>
         <hr>
-
-        <!-- Coordinator Name -->
-        <input type="text" name="coordinator_name" placeholder="Coordinator Name" required>
+        <label>Coordinator Name:</label>
+        <input type="text" name="coordinator_name" value="{{ event.coordinator_name|default:'' }}"><br>
         <hr>
-
-        <!-- Contact Info -->
-        <input type="text" name="contact_info" placeholder="Coordinator Contact Info (Phone/Email)" required>
+        <label>Contact Info:</label>
+        <input type="text" name="contact_info" value="{{ event.contact_info|default:'' }}"><br>
         <hr>
-
-        <!-- Registration & WhatsApp Links -->
-        <input type="url" name="registration_link" placeholder="Google Form Registration Link">
+        <label>Registration Link:</label>
+        <input type="url" name="registration_link" value="{{ event.registration_link|default:'' }}"><br>
         <hr>
-
-        <input type="url" name="whatsapp_link" placeholder="WhatsApp Group Link">
+        <label>WhatsApp Link:</label>
+        <input type="url" name="whatsapp_link" value="{{ event.whatsapp_link|default:'' }}"><br>
         <hr>
-
-        <!-- Poster Upload -->
-        <label>Upload Event Poster:</label>
-        <input type="file" name="poster" accept="image/*">
+        <label>Poster:</label>
+        <input type="file" name="poster"><br>
         <hr>
-
-        <!-- Submit Button -->
-        <button type="submit">Add Event</button>
+        <button type="submit">
+            {% if is_update %} Update Event {% else %} Add Event {% endif %}
+        </button>
     </form>
 
+    <div>
+        <a href="{% url 'index' %}" class="text-blue-500 hover:underline">Back to Home</a>
 
-</div>
+    </div>
 
-{% endblock %}
+    {% endblock %}

@@ -9,7 +9,10 @@ from email.mime.image import MIMEImage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import date
-
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import Event
 
 from django.shortcuts import render
 from django.db.models import Q
@@ -26,10 +29,10 @@ def index(request):
             | Q(category__icontains=q)
             | Q(coordinator_name__icontains=q)
             | Q(name__icontains=q),
-            day__gte=today  
+            day__gte=today,
         ).order_by("day")
     else:
-        events = Event.objects.filter(day__gte=today).order_by("day")[:3]  
+        events = Event.objects.filter(day__gte=today).order_by("day")[:3]
 
     return render(request, "base/index.html", {"events": events})
 
@@ -179,3 +182,49 @@ def past_events(request):
         "events": events,
     }
     return render(request, "base/past_events.html", context)
+
+
+@login_required(login_url="/login")
+def update_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+
+
+    if request.method == "POST":
+        event.name = request.POST.get("name")
+        event.headline = request.POST.get("headline")
+        event.day = request.POST.get("day")
+        event.time = request.POST.get("time")
+        event.deadline = request.POST.get("deadline")
+        event.rules = request.POST.get("rules")
+        event.description = request.POST.get("description")
+        event.venue = request.POST.get("venue")
+        event.department = request.POST.get("department")
+        event.category = request.POST.get("category")
+        event.coordinator_name = request.POST.get("coordinator_name")
+        event.contact_info = request.POST.get("contact_info")
+        event.registration_link = request.POST.get("registration_link")
+        event.whatsapp_link = request.POST.get("whatsapp_link")
+
+        if "poster" in request.FILES:
+            event.poster = request.FILES["poster"]
+
+        event.save()
+        return redirect("admin_dashboard", admin_id=request.user.id)
+
+    # GET request (show the pre-filled form)
+    context = {
+        "event": event,
+        "is_update": True,  # to know if the form is for update
+    }
+    return render(request, "base/add_event.html", context)
+
+@login_required(login_url="/login")
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+
+    if request.method == "POST":
+        event.delete()
+        return redirect("admin_dashboard", admin_id=request.user.id)
+    
+    # No GET rendering needed
+    return redirect("admin_dashboard", admin_id=request.user.id)
