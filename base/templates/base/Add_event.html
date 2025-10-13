@@ -7,64 +7,496 @@
 
 
 <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .upload-area {
+            transition: all 0.3s ease;
+        }
+        .upload-area.dragover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .icon-circle.selected {
+        border-color: #000000; /* Darker border for selection */
+        background-color: #F8F9FA; /* Very light gray background */
+    }
+
+    /* Styling for the SVG icons to change color */
+    .icon-circle svg {
+        fill: #6C757D; /* Default icon color */
+        transition: fill 0.2s;
+    }
+
+    .icon-circle.selected svg {
+        fill: #000000; /* Darker icon color when selected */
+    }
+    </style>
 
 
-<div class="">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label>Event Name:</label>
-        <input type="text" name="name" value="{{ event.name|default:'' }}" required><br>
-        <hr>
-        <label>Headline:</label>
-        <input type="text" name="headline" value="{{ event.headline|default:'' }}" required><br>
-        <hr>
-        <label>Day:</label>
-        <input type="date" name="day" value="{{ event.day|date:'Y-m-d' }}"><br>
-        <hr>
-        <label>Time:</label>
-        <input type="time" name="time" value="{{ event.time|time:'H:i' }}"><br>
-        <hr>
-        <label>Deadline:</label>
-        <input type="date" name="deadline" value="{{ event.deadline|date:'Y-m-d' }}"><br>
-        <hr>
-        <label>Rules:</label>
-        <textarea name="rules">{{ event.rules|default:'' }}</textarea><br>
-        <hr>
-        <label>Description:</label>
-        <textarea name="description">{{ event.description|default:'' }}</textarea><br>
-        <hr>
-        <label>Venue:</label>
-        <input type="text" name="venue" value="{{ event.venue|default:'' }}"><br>
-        <hr>
-        <label>Department:</label>
-        <input type="text" name="department" value="{{ event.department|default:'' }}"><br>
-        <hr>
-        <label>Category:</label>
-        <input type="text" name="category" value="{{ event.category|default:'' }}"><br>
-        <hr>
-        <label>Coordinator Name:</label>
-        <input type="text" name="coordinator_name" value="{{ event.coordinator_name|default:'' }}"><br>
-        <hr>
-        <label>Contact Info:</label>
-        <input type="text" name="contact_info" value="{{ event.contact_info|default:'' }}"><br>
-        <hr>
-        <label>Registration Link:</label>
-        <input type="url" name="registration_link" value="{{ event.registration_link|default:'' }}"><br>
-        <hr>
-        <label>WhatsApp Link:</label>
-        <input type="url" name="whatsapp_link" value="{{ event.whatsapp_link|default:'' }}"><br>
-        <hr>
-        <label>Poster:</label>
-        <input type="file" name="poster"><br>
-        <hr>
-        <button type="submit">
-            {% if is_update %} Update Event {% else %} Add Event {% endif %}
-        </button>
-    </form>
+<div class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 ">
 
-    <div>
-        <a href="{% url 'index' %}" class="text-blue-500 hover:underline">Back to Home</a>
+                <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Create Event</h1>
+            <p class="text-gray-600 mt-2">Fill in the details below to create your event</p>
+        </header>
 
+         <!-- Main Form -->
+
+    
+        <form method="POST" enctype="multipart/form-data " class="bg-white rounded-xl  shadow-sm p-6">
+            {% csrf_token %}
+
+            <!-- Event Name -->
+
+             <!-- Event Name Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Add Details</h2>
+                
+                <div class="mb-6">
+                        <label for="eventName" class="block text-gray-700 font-medium mb-2">Give your event a name</label>
+                        <input type="text" id="eventName" value="{{ event.name|default:'' }}" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter event name" required>
+                </div>
+
+                <!-- Headline -->
+
+                <div class="mb-6">
+                    <label for="eventHeadline" class="block text-gray-700 font-medium mb-2">Give your event a Headline</label>
+                    <input type="text" name="headline" value="{{ event.headline|default:'' }}" id="eventHeadline" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter event headline">
+                </div>
+
+                 <!-- Event Details Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                     
+                    <!-- Day -->
+                    
+                    <div>
+                        <label for="eventDay" class="block text-gray-700 font-medium mb-2">Event Day</label>
+                        <div class="relative">
+                            <input type="date" id="eventDay" name="day" value="{{ event.day|date:'Y-m-d' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="2025-08-20">
+                        </div>
+                    </div>
+
+
+                    <!-- Time -->
+                    <div>
+                        <label for="eventTime" class="block text-gray-700 font-medium mb-2">Time</label>
+                        <div class="relative">
+                            <input type="time" id="eventTime" name="time" value="{{ event.time|time:'H:i' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="15:00">
+                        </div>
+                    </div>
+
+                    <!-- Deadline -->
+
+                    <div>
+                        <label for="deadline" class="block text-gray-700 font-medium mb-2">Registration Deadline</label>
+                        <div class="relative">
+                            <input type="date" id="deadline" name="deadline" value="{{ event.deadline|date:'Y-m-d' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="2025-08-14">
+                        </div>
+                    </div>
+           </div>
     </div>
+
+            <hr class="my-8">
+
+            <!-- Rules & Regulations Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Rules & Regulations</h2>
+                <textarea id="rules" name="rules" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add Rules" required>{{ event.rules|default:'' }}</textarea>
+            </div>
+            <!-- Description Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Event Description</h2>
+                <textarea id="rules" name="description"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add description" required>{{ event.description|default:'' }}</textarea>
+            </div>
+
+
+            <hr class="my-8">
+            
+           
+            
+
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Add Venue</h2>
+                  <div class="mb-6">
+                    <label for="venue" class="block text-gray-700 font-medium mb-2">Venue</label>
+                    <input type="text" id="venue" name="venue" value="{{ event.venue|default:'' }}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter event venue">
+                </div>
+
+            <!-- Department Dropdown -->
+
+                 <div class="mb-6">
+                    <label>Department:</label>
+        <input type="text" name="department" value="{{ event.department|default:'' }}"><br>
+                </div>
+
+
+
+           
+
+            
+           
+
+            <!-- Category Dropdown -->
+           <div class="mb-6">
+
+             <label>Category:</label>
+        <input type="text" name="category" value="{{ event.category|default:'' }}"><br>
+            </div>
+
+            <hr class="my-8">
+
+             <!-- Coordinator Details Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Coordinator Details:</h2>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="coordinatorName" name="coordinator_name" class="block text-gray-700 font-medium mb-2">Name</label>
+                        <input type="text" id="coordinatorName" value="{{ event.coordinator_name|default:'' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter coordinator name">
+                    </div>
+                    
+                    <div>
+                        <label for="contactInfo" name="contact_info" class="block text-gray-700 font-medium mb-2">Contact Info</label>
+                        <input type="text" id="contactInfo" value="{{ event.contact_info|default:'' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter contact information">
+                    </div>
+                </div>
+
+                <button type="button" id="addCoordinator" class="bg-red-600 cursor-pointer text-white px-4 py-3 hover:bg-red-700  rounded-lg font-medium flex items-center">
+                    <i class="fas fa-plus-circle mr-2"></i> Add more coordinators
+                </button>
+            </div>
+
+            <hr class="my-8">
+
+
+                       <!-- Links Section -->
+            <div class="mb-8">
+                <div class="mb-6">
+                    <h3 class="text-gray-700 font-medium mb-2">Registration link</h3>
+                    <input type="url"  name="registration_link" value="{{ event.registration_link|default:'' }}"  id="registrationLink" class="w-full cursor-pointer px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="examplelink.google.com" >
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-gray-700 font-medium mb-2">Whatsapp Group link</h3>
+                    <input type="url" id="whatsappLink" value="{{ event.whatsapp_link|default:'' }}" name="whatsapp_link" class="w-full px-4 py-3 cursor-pointer border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="examplelink.google.com" >
+                </div>
+            </div>
+
+            <hr class="my-8">
+
+
+             <!-- Event Poster Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Event Poster:</h2>
+                
+                <div id="uploadArea" class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                    <p class="text-gray-600 mb-2">Upload your event poster</p>
+                    <p class="text-gray-500 text-sm">PNG, JPG, GIF up to 10MB</p>
+                    <button type="button" id="uploadPoster" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">Choose File</button>
+                    <input type="file" name="poster"  id="posterFile" class="hidden" accept="image/*">
+                </div>
+                
+                <!-- Preview Container (hidden by default) -->
+                <div id="previewContainer" class="mt-6 hidden">
+                    <h3 class="text-gray-700 font-medium mb-3">Poster Preview:</h3>
+                    <div class="border border-gray-300 rounded-lg p-4 flex justify-center">
+                        <img id="posterPreview" class="max-h-64 rounded" src="" alt="Poster preview">
+                    </div>
+                    <button type="button" id="changePoster" class="mt-3 text-blue-600 font-medium flex items-center">
+                        <i class="fas fa-edit mr-2"></i> Change Poster
+                    </button>
+                </div>
+            </div>
+
+             <!-- Submit Button -->
+            <div class="flex justify-end mt-8">
+                <button type="submit" class="bg-red-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center">
+                    <i class="fas fa-plus-circle mr-2"></i> {% if is_update %} Update Event {% else %} Add Event {% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+
+           
+<script>
+        // Category selection functionality
+        document.querySelectorAll('.category-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove selection from all options
+                document.querySelectorAll('.category-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Add selection to clicked option
+                this.classList.add('selected');
+                
+                // Update the hidden select value
+                const categoryValue = this.getAttribute('data-value');
+                document.getElementById('category').value = categoryValue;
+            });
+        });
+
+        // Add coordinator functionality
+        document.getElementById('addCoordinator').addEventListener('click', function() {
+            const coordinatorsContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.gap-6.mb-6');
+            
+            // Create new coordinator fields
+            const newCoordinator = document.createElement('div');
+            newCoordinator.className = 'coordinator-entry grid grid-cols-1 md:grid-cols-2 gap-6 mb-4';
+            newCoordinator.innerHTML = `
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Name</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter coordinator name">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Contact Info</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter contact information">
+                </div>
+            `;
+            
+            coordinatorsContainer.appendChild(newCoordinator);
+        });
+
+        // File upload functionality
+        document.getElementById('uploadPoster').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('posterFile').click();
+        });
+
+        document.getElementById('uploadArea').addEventListener('click', function() {
+            document.getElementById('posterFile').click();
+        });
+
+        // Drag and drop functionality
+        const uploadArea = document.getElementById('uploadArea');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            uploadArea.classList.add('dragover');
+        }
+
+        function unhighlight() {
+            uploadArea.classList.remove('dragover');
+        }
+
+        uploadArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+
+        document.getElementById('posterFile').addEventListener('change', function(e) {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                
+                // Check if file is an image
+                if (!file.type.match('image.*')) {
+                    alert('Please select an image file (PNG, JPG, GIF)');
+                    return;
+                }
+                
+                // Check file size (10MB limit)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('File size exceeds 10MB limit');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // Update the upload area
+                    uploadArea.innerHTML = `
+                        <div class="flex flex-col items-center justify-center">
+                            <i class="fas fa-check-circle text-green-500 text-4xl mb-3"></i>
+                            <p class="text-gray-700 font-medium">Poster uploaded successfully!</p>
+                            <p class="text-gray-500 text-sm mt-1">${file.name}</p>
+                        </div>
+                    `;
+                    
+                    // Show preview
+                    const previewContainer = document.getElementById('previewContainer');
+                    const posterPreview = document.getElementById('posterPreview');
+                    
+                    posterPreview.src = e.target.result;
+                    previewContainer.classList.remove('hidden');
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Change poster functionality
+        document.getElementById('changePoster').addEventListener('click', function() {
+            // Reset upload area
+            uploadArea.innerHTML = `
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                <p class="text-gray-600 mb-2">Upload your event poster</p>
+                <p class="text-gray-500 text-sm">PNG, JPG, GIF up to 10MB</p>
+                <button type="button" id="uploadPoster" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">Choose File</button>
+            `;
+            
+            // Hide preview
+            document.getElementById('previewContainer').classList.add('hidden');
+            
+            // Reattach event listeners
+            document.getElementById('uploadPoster').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('posterFile').click();
+            });
+            
+            document.getElementById('posterFile').value = '';
+        });
+
+        // Form submission
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const eventName = document.getElementById('eventName').value;
+            const eventHeadline = document.getElementById('eventHeadline').value;
+            const coordinatorName = document.getElementById('coordinatorName').value;
+            const contactInfo = document.getElementById('contactInfo').value;
+            const eventDay = document.getElementById('eventDay').value;
+            const eventTime = document.getElementById('eventTime').value;
+            const deadline = document.getElementById('deadline').value;
+            const venue = document.getElementById('venue').value;
+            const department = document.getElementById('department').value;
+            const category = document.getElementById('category').value;
+            
+            if (!eventName || !eventHeadline || !coordinatorName || !contactInfo || !eventDay || !eventTime || !deadline || !venue || !department || !category) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Check if a poster is uploaded
+            const posterFile = document.getElementById('posterFile').files[0];
+            if (!posterFile) {
+                alert('Please upload an event poster');
+                return;
+            }
+            
+            // Validate dates
+            const today = new Date().toISOString().split('T')[0];
+            if (eventDay < today) {
+                alert('Event day cannot be in the past');
+                return;
+            }
+            
+            if (deadline > eventDay) {
+                alert('Registration deadline cannot be after the event day');
+                return;
+            }
+            
+            // Format dates for display
+            const eventDayFormatted = formatDate(eventDay);
+            const deadlineFormatted = formatDate(deadline);
+            const eventTimeFormatted = formatTime(eventTime);
+            
+            // Get selected department text
+            const departmentSelect = document.getElementById('department');
+            const departmentText = departmentSelect.options[departmentSelect.selectedIndex].text;
+            
+            // In a real application, you would submit the form data to a server
+            // For now, we'll just show a success message with the formatted dates
+            alert(`Event created successfully!\n\nEvent: ${eventName}\nDate: ${eventDayFormatted}\nTime: ${eventTimeFormatted}\nVenue: ${venue}\nDepartment: ${departmentText}\nCategory: ${category}`);
+            
+            // Reset form
+            this.reset();
+            document.getElementById('previewContainer').classList.add('hidden');
+            
+            // Reset upload area
+            uploadArea.innerHTML = `
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                <p class="text-gray-600 mb-2">Upload your event poster</p>
+                <p class="text-gray-500 text-sm">PNG, JPG, GIF up to 10MB</p>
+                <button type="button" id="uploadPoster" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">Choose File</button>
+            `;
+            
+            // Reset category selection
+            document.querySelectorAll('.category-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            document.getElementById('category').value = '';
+            
+            // Set default values for date/time fields
+            document.getElementById('eventDay').value = '2025-08-20';
+            document.getElementById('eventTime').value = '15:00';
+            document.getElementById('deadline').value = '2025-08-14';
+            
+            // Reattach event listeners
+            document.getElementById('uploadPoster').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.getElementById('posterFile').click();
+            });
+        });
+        
+        // Helper functions to format dates and times
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        function formatTime(timeString) {
+            const [hours, minutes] = timeString.split(':');
+            const hour = parseInt(hours);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+            const displayHour = hour % 12 || 12;
+            return `${displayHour}:${minutes} ${ampm}`;
+        }
+
+
+         document.addEventListener('DOMContentLoaded', () => {
+        const categories = document.querySelectorAll('.category-option');
+        const hiddenCategoryInput = document.getElementById('selected-category');
+
+        categories.forEach(option => {
+            option.addEventListener('click', (event) => {
+                const iconCircle = option.querySelector('.icon-circle');
+                const selectedCategoryValue = iconCircle.getAttribute('data-category');
+
+                // 1. Deselect all other options (removes the 'selected' class)
+                categories.forEach(c => {
+                    const circle = c.querySelector('.icon-circle');
+                    circle.classList.remove('selected');
+                });
+
+                // 2. Select the current option (adds the 'selected' class)
+                iconCircle.classList.add('selected');
+
+                // 3. Update the hidden input field's value
+                hiddenCategoryInput.value = selectedCategoryValue;
+            });
+        });
+    });
+    </script>
 
     {% endblock %}
