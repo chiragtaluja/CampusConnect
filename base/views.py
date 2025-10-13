@@ -1,3 +1,4 @@
+from urllib import request
 from django.shortcuts import render, redirect
 from .models import Subscriber, Event
 from django.contrib import messages
@@ -17,6 +18,9 @@ from .models import Event
 from django.shortcuts import render
 from django.db.models import Q
 from .models import Event
+
+from django.utils import timezone
+import datetime
 
 
 def index(request):
@@ -54,15 +58,22 @@ def subscribe(request):
     return redirect("index")
 
 
+from django.shortcuts import render
+from django.conf import settings
+from .models import Event, Subscriber
+from .utils import send_email_async
+from django.template.loader import render_to_string
+
+
 @login_required(login_url="user_login")
 def add_event(request):
     if request.method == "POST":
         # Collect form data
         name = request.POST.get("name")
         headline = request.POST.get("headline")
-        day = request.POST.get("day")
+        day_str = request.POST.get("day")
         time = request.POST.get("time")
-        deadline = request.POST.get("deadline")
+        deadline_str = request.POST.get("deadline")
         rules = request.POST.get("rules")
         description = request.POST.get("description")
         venue = request.POST.get("venue")
@@ -74,6 +85,11 @@ def add_event(request):
         whatsapp_link = request.POST.get("whatsapp_link")
         poster = request.FILES.get("poster")
 
+        # Convert day and deadline to timezone-aware datetime
+        day = timezone.make_aware(datetime.datetime.strptime(day_str, "%Y-%m-%d")) if day_str else None
+        deadline = timezone.make_aware(datetime.datetime.strptime(deadline_str, "%Y-%m-%d")) if deadline_str else None
+
+        # Create Event object
         event = Event.objects.create(
             name=name,
             headline=headline,
@@ -93,32 +109,19 @@ def add_event(request):
             created_by=request.user,
         )
 
-        subscribers = Subscriber.objects.values_list("email", flat=True)
-
+        # Prepare email
+        subscribers = list(Subscriber.objects.values_list("email", flat=True))
         subject = f"🎉 New Event: {event.name}"
         from_email = settings.EMAIL_HOST_USER
+        html_content = render_to_string("emails/event_email.html", {"event": event})
 
-        html_content = render_to_string(
-            "emails/event_email.html",
-            {"event": event},
-        )
+        # Send email asynchronously
+        send_email_async(subject, html_content, from_email, subscribers, poster)
 
-        msg = EmailMultiAlternatives(subject, "", from_email, [], bcc=list(subscribers))
-        msg.attach_alternative(html_content, "text/html")
-
-        if event.poster:
-            with open(event.poster.path, "rb") as f:
-                img = MIMEImage(f.read())
-                img.add_header("Content-ID", "<poster>")  # Reference in template
-                img.add_header(
-                    "Content-Disposition", "inline", filename=event.poster.name
-                )
-                msg.attach(img)
-
-        msg.send()
+        messages.success(request, "Event created and notifications sent!")
+        return redirect("admin_dashboard", admin_id=request.user.id)
 
     return render(request, "base/add_event.html")
-
 
 def event(request, event_id):
     event = Event.objects.get(id=event_id)
@@ -188,13 +191,11 @@ def past_events(request):
 def update_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
 
-
     if request.method == "POST":
+        # Collect form data
         event.name = request.POST.get("name")
         event.headline = request.POST.get("headline")
-        event.day = request.POST.get("day")
         event.time = request.POST.get("time")
-        event.deadline = request.POST.get("deadline")
         event.rules = request.POST.get("rules")
         event.description = request.POST.get("description")
         event.venue = request.POST.get("venue")
@@ -205,18 +206,32 @@ def update_event(request, event_id):
         event.registration_link = request.POST.get("registration_link")
         event.whatsapp_link = request.POST.get("whatsapp_link")
 
+        # Convert day and deadline to timezone-aware datetime
+        day_str = request.POST.get("day")
+        deadline_str = request.POST.get("deadline")
+
+        if day_str:
+            event.day = timezone.make_aware(datetime.datetime.strptime(day_str, "%Y-%m-%d"))
+
+        if deadline_str:
+            event.deadline = timezone.make_aware(datetime.datetime.strptime(deadline_str, "%Y-%m-%d"))
+
+        # Update poster if provided
         if "poster" in request.FILES:
             event.poster = request.FILES["poster"]
 
+        # Save the updated event
         event.save()
         return redirect("admin_dashboard", admin_id=request.user.id)
 
     # GET request (show the pre-filled form)
     context = {
         "event": event,
-        "is_update": True,  # to know if the form is for update
+        "is_update": True,  # To know this is an update form
     }
     return render(request, "base/add_event.html", context)
+
+
 
 @login_required(login_url="/login")
 def delete_event(request, event_id):
@@ -225,6 +240,6 @@ def delete_event(request, event_id):
     if request.method == "POST":
         event.delete()
         return redirect("admin_dashboard", admin_id=request.user.id)
-    
+
     # No GET rendering needed
     return redirect("admin_dashboard", admin_id=request.user.id)
