@@ -37,30 +37,37 @@
     <div
       class="menu-responsive hidden fixed flex inset-0 transition-all bg-black/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 ">
       <ul class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-red-600">
+
+        {% url 'add_event' as add_event_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group  {% if request.path == add_event_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'add_event' %}">Add Event</a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out  {% if request.path == add_event_url %}scale-x-100{% endif %}"">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+
+        {% url 'index' as index_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group {% if request.path == index_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'index' %}">All Events
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 {% if request.path == index_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+
+         {% url 'admin_dashboard' request.user.id as dashboard_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group  {% if request.path == dashboard_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'admin_dashboard' request.user.id %}">Your Events
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 {% if request.path == dashboard_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+        {% url 'logout' as logout_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group {% if request.path == logout_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'logout' %}">Logout</a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 {% if request.path == logout_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
 
@@ -76,39 +83,48 @@
     <div
       class="menu-responsive hidden fixed flex inset-0 transition-all bg-black/70 backdrop-blur-xl z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 flex-col md:flex-row md:space-x-8 -mt-56 md:mt-0 ">
       <ul class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8">
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-red-600">
+
+        {% url 'index' as home_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group  {% if request.path == home_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'index' %}">Home
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 {% if request.path == home_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+
+        {% url 'past_events' as past_events_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group {% if request.path == past_events_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'past_events' %}">Past Events
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 {% if request.path == past_events_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+
+        {% url 'upcoming_events' as upcoming_events_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group {% if request.path == upcoming_events_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'upcoming_events' %}">Upcoming Events
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5  {% if request.path == upcoming_events_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+
+         {% url 'about_us' as about_us_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group  {% if request.path == about_us_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'about_us' %}">About
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5 bg-red-600  {% if request.path == about_us_url %}scale-x-100{% endif %} scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
-        <li class="text-lg md:text-base lg:text-lg font-medium group text-white">
+         {% url 'user_login' as login_url %}
+        <li class="text-lg md:text-base lg:text-lg font-medium group   {% if request.path == login_url %}text-red-600{% else %}text-white{% endif %}">
           <a href="{% url 'user_login' %}">Login
           </a>
           <div
-            class="h-0.5 bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
+            class="h-0.5    {% if request.path == login_url %}scale-x-100{% endif %} bg-red-600 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out">
           </div>
         </li>
       </ul>

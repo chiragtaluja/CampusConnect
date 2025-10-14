@@ -3,7 +3,72 @@
 
 {% block content %}
 
-{% include 'base/newsletter_component.html' %}
+  {% if request.user.is_authenticated %}
+   {% else %}
+
+<style>
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    .slider::-webkit-scrollbar {
+      display: none;
+    }
+    .slider-container { position: relative; width: 100vw; height: 100vh; overflow: hidden; display: flex; justify-content: center; align-items: center; 
+    } 
+    .slider { display: flex; width: calc(100vw * 6); /* duplicate images to loop smoothly */ animation: slide 30s linear infinite; } 
+    .slide { width: 100vw; height: 100vh; flex-shrink: 0; position: relative; } 
+    .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); } 
+    .divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); transform: translateX(-50%); z-index: 2; }
+     @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+</style>
+
+
+
+  <div class="bg-white flex flex-col  items-center  text-center px-4 mb-5 ">
+    <!-- Title Section -->
+  <h1 class="text-7xl md:text-5xl font-extrabold text-red-600 text-shadow tracking-wide mb-2">
+    MAHARISHI MARKANDESHWAR
+  </h1>
+  <h2 class="text-lg md:text-xl font-semibold text-red-700 italic mb-1">
+    (DEEMED TO BE UNIVERSITY)
+  </h2>
+  <p class="text-lg md:text-xl text-black font-medium mb-8">
+    Established under section 3 of the UGC Act. 1956
+  </p>
+
+    <div class="w-full"> 
+        <div class="w-full overflow-hidden relative shadow-xl">
+            <div id="sliderTrack" class="flex"> 
+                
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
+                    <img src="https://via.placeholder.com/1200x600/D05347/FFFFFF?text=Slide+1" alt="Image 1" class="w-full h-full rounded-lg object-cover">
+                </div>
+                
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
+                    <img src="https://via.placeholder.com/1200x600/4c754d/FFFFFF?text=Slide+2" alt="Image 2" class="w-full h-full rounded-lg object-cover">
+                </div>
+                
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
+                    <img src="https://via.placeholder.com/1200x600/2a8684/FFFFFF?text=Slide+3" alt="Image 3" class="w-full h-full rounded-lg object-cover">
+                </div>
+                
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
+                    <img src="https://via.placeholder.com/1200x600/9b59b6/FFFFFF?text=Slide+4" alt="Image 4" class="w-full h-full rounded-lg object-cover">
+                </div>
+                
+            </div>
+        </div>
+
+ 
+
+
+  </div>
+</div>
+
+ {% endif %}
+
+
+<!-- {% include 'base/newsletter_component.html' %} -->
 
 <!-- space for slider  -->
 
@@ -14,4 +79,79 @@
 <hr>
 <a href="{% url 'past_events' %}">See all Past Events</a>
 
+<script>
+     document.addEventListener('DOMContentLoaded', () => {
+            const sliderTrack = document.getElementById('sliderTrack');
+            const slideCount = sliderTrack.children.length; 
+            let currentSlide = 0; 
+            const slideInterval = 3500;
+            const SMOOTH_TRANSITION = 'transform 0.5s ease-in-out';
+        
+            function getSlidesVisible() {
+                const width = window.innerWidth;
+                if (width >= 1024) {
+                    return 3; 
+                } else if (width >= 768) {
+                    return 2; 
+                } else {
+                    return 1; 
+                }
+            }
+        
+            function setupSlider() {
+                const slidesVisible = getSlidesVisible();
+                const trackWidth = (slideCount / slidesVisible) * 100;
+                sliderTrack.style.width = `${trackWidth}%`;
+                
+                currentSlide = 0;
+                sliderTrack.style.transition = 'none';
+                sliderTrack.style.transform = `translateX(0)`;
+            }
+        
+            function nextSlide() {
+                const slidesVisible = getSlidesVisible();
+                const shiftAmount = 100 / slidesVisible; 
+                const maxShiftIndex = Math.ceil(slideCount - slidesVisible);
+                
+                currentSlide++;
+        
+                if (currentSlide > maxShiftIndex) {
+                    currentSlide = 0;
+                    sliderTrack.style.transition = 'none'; 
+                    
+                    setTimeout(() => {
+                        sliderTrack.style.transition = SMOOTH_TRANSITION;
+                    }, 50); 
+                } else {
+                    sliderTrack.style.transition = SMOOTH_TRANSITION; 
+                }
+                
+                let offset = currentSlide * shiftAmount;
+                
+                if (currentSlide === maxShiftIndex) {
+                    offset = maxShiftIndex * shiftAmount;
+                }
+        
+                sliderTrack.style.transform = `translateX(-${offset}%)`;
+            }
+        
+            setupSlider();
+            
+            let sliderIntervalId = setInterval(nextSlide, slideInterval);
+        
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    setupSlider();
+                    
+                    clearInterval(sliderIntervalId);
+                    sliderIntervalId = setInterval(nextSlide, slideInterval);
+                }, 250); 
+            });
+        });
+
+  </script>
+
 {% endblock content %}
+
