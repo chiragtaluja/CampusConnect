@@ -1,6 +1,19 @@
 {% extends 'main.html' %}
 {% block content %}
 
+{% if events %}
 {% include 'base/event_component.html' %}
+
+{% else %}
+<div>
+    <img src="https://cdn-icons-png.flaticon.com/512/7486/7486740.png" alt="No upcoming events" width="160">
+    <h4>No Upcoming Events Yet 🎉</h4>
+    <p>Looks like there aren’t any events planned right now.<br>Check back soon — exciting things
+        are on the way!</p>
+
+    <a href="{% url 'past_events' %}">View Past Events</a>
+</div>
+
+{% endif %}
 
 {% endblock content %}
