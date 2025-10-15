@@ -1,9 +1,40 @@
 {% extends 'main.html' %}
 {% block content %}
-<h1>Welcome, {{ request.user.first_name }} !! </h1>
 
+<h1 class="mx-10 text-3xl sm:text-4xl font-extrabold text-black tracking-wide pt-6 pb-2">
+    Welcome, {{ request.user.first_name }}!
+</h1>
 
+{% if events %}
 {% include 'base/event_component.html' %}
+
+{% else %}
+<div class="flex flex-col items-center justify-center p-8 text-center bg-gray-50 min-h-[400px] rounded-xl shadow-lg border border-gray-200 mx-auto max-w-lg mt-10 mb-[80vh]">
+
+    <img 
+        src="https://cdn-icons-png.flaticon.com/512/7486/7486740.png" 
+        alt="No past events icon" 
+        class="w-24 h-24 mb-4 opacity-80"
+    >
+
+    <h4 class="text-3xl font-bold text-gray-800 mb-2">
+        The Archive is Empty!
+    </h4>
+
+    <p class="text-base text-gray-600 mb-6 max-w-sm">
+        It appears there are no event records available right now.<br>
+        Be the First to Add an Event!!!
+    </p>
+
+     <a href="{% url 'add_event' %}" 
+       class="px-6 py-3 text-sm font-semibold tracking-wider text-white uppercase transition-colors duration-300 transform bg-red-600 rounded-full 
+              hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-opacity-50 shadow-md">
+        
+        Add New Event
+    </a>
+</div>
+
+{% endif %}
 
 
 {% endblock content%}

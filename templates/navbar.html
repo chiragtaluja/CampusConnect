@@ -26,7 +26,7 @@
     </button>
 
     <!-- logo -->
-    <a href="javascript:void(0)" class="mt-2 "><img src="{% static 'base/assets/img/Navbar_logo.png' %}" alt="logo"
+    <a href="javascript:void(0)" class="mt-3 "><img src="{% static 'base/assets/img/Navbar_logo.png' %}" alt="logo"
         class='w-[200px] h-[60px] ' />
     </a>
     <a href="javascript:void(0)" class="hidden mt-2"><img src="{% static 'base/assets/img/logo-short.jpeg' %}" alt="logo"
@@ -135,7 +135,7 @@
 
     <!-- search -->
 
-    <button class="max-md:mr-5 search-menu  flex justify-center items-center h-12 px-5 font-medium text-gray-100 bg-red-600 whitespace-nowrap hover:bg-red-700 hover:text-white
+    <button class="max-md:mr-5 search-menu  cursor-pointer flex justify-center items-center h-12 px-5 font-medium text-gray-100 bg-red-600 whitespace-nowrap hover:bg-red-700 hover:text-white
     rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500 focus:outline-none">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd"
@@ -150,16 +150,16 @@
   <form action="{{ request.path }}" method="GET">
     <div class="search-form mt-5 max-h-0 opacity-0 overflow-hidden flex items-center space-x-4 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24 
   transform transition-all duration-500 ease-in-out">
-      <div class="flex bg-gray-200 p-2 w-full space-x-2 rounded-lg items-center">
+      <div class="flex bg-gray-200  p-2 w-full space-x-2 rounded-lg items-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-75 ml-4" fill="none" viewBox="0 0 24 24"
           stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          <path stroke-linecap="" stroke-linejoin="" stroke-width="2"
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input
-          class="w-full bg-gray-50 outline-none border-transparent focus:border-transparent focus:ring-0 rounded-lg text-sm sm:text-base"
+          class="w-full bg-gray-50 outline-none border-transparent focus:border-transparent focus:ring-0 px-2 rounded-sm text-sm sm:text-base"
           name="q" value="{{ request.GET.q }}" type="text" placeholder="Search for event" />
-        <button type="submit">Search</button>
+        <button type="submit" class="cursor-pointer hover:scale-105 hover:underline">Search</button>
 
       </div>
     </div>

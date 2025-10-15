@@ -5,15 +5,30 @@
 {% include 'base/event_component.html' %}
 
 {% else %}
-<div>
-    <img src="https://cdn-icons-png.flaticon.com/512/7486/7486740.png" alt="No upcoming events" width="160">
-    <h4>No Upcoming Events Yet 🎉</h4>
-    <p>Looks like there aren’t any events planned right now.<br>Check back soon — exciting things
-        are on the way!</p>
+<div class="flex flex-col items-center justify-center p-8 text-center bg-gray-50 min-h-[400px] rounded-xl shadow-lg border border-gray-200 mx-auto max-w-lg mt-10 mb-[80vh]">
 
-    <a href="{% url 'past_events' %}">View Past Events</a>
+    <img 
+        src="https://cdn-icons-png.flaticon.com/512/7486/7486740.png" 
+        alt="No upcoming events icon" 
+        class="w-24 h-24 mb-4 opacity-80"
+    >
+
+    <h4 class="text-3xl font-bold text-gray-800 mb-2">
+        No Upcoming Events Yet 
+    </h4>
+
+    <p class="text-base text-gray-600 mb-6 max-w-sm">
+        Looks like there aren’t any events planned right now.<br>
+        Check back soon — exciting things are on the way!
+    </p>
+
+    <a href="{% url 'past_events' %}" 
+       class="px-6 py-3 text-sm font-semibold tracking-wider text-white uppercase transition-colors duration-300 transform bg-red-600 rounded-full 
+              hover:bg-red-700 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-opacity-50 shadow-md">
+        
+        View Past Events
+    </a>
 </div>
-
 {% endif %}
 
 {% endblock content %}

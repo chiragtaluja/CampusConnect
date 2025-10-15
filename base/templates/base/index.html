@@ -1,5 +1,7 @@
 {% extends "main.html" %}
 
+{% load static %}
+
 {% block content %}
 
     {% if request.user.is_authenticated %}
@@ -37,26 +39,58 @@
   </p>
 
     <div class="w-full"> 
-        <div class="w-full overflow-hidden relative shadow-xl">
+        <!-- <div class="w-full overflow-hidden relative shadow-xl">
             <div id="sliderTrack" class="flex"> 
                 
-                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
-                    <img src="https://via.placeholder.com/1200x600/D05347/FFFFFF?text=Slide+1" alt="Image 1" class="w-full h-full rounded-lg object-cover">
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] rounded-lg  h-auto">
+                    <img src="{% static 'base/assets/img/index1.webp' %}" alt="Image 1" class="w-full h-full rounded-lg object-cover">
                 </div>
                 
-                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
-                    <img src="https://via.placeholder.com/1200x600/4c754d/FFFFFF?text=Slide+2" alt="Image 2" class="w-full h-full rounded-lg object-cover">
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] h-auto rounded-lg ">
+                    <img src="{% static 'base/assets/img/index2.webp' %}" alt="Image 2" class="w-full h-full rounded-lg object-cover">
                 </div>
                 
-                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
-                    <img src="https://via.placeholder.com/1200x600/2a8684/FFFFFF?text=Slide+3" alt="Image 3" class="w-full h-full rounded-lg object-cover">
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] h-auto rounded-lg ">
+                    <img src="{% static 'base/assets/img/index3.webp' %}" alt="Image 3" class="w-full h-full rounded-lg object-cover">
                 </div>
                 
-                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-2 aspect-[2/1] h-auto">
-                    <img src="https://via.placeholder.com/1200x600/9b59b6/FFFFFF?text=Slide+4" alt="Image 4" class="w-full h-full rounded-lg object-cover">
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] h-auto rounded-lg ">
+                    <img src="{% static 'base/assets/img/index4.webp' %}" alt="Image 4" class="w-full h-full rounded-lg object-cover">
+                </div>
+                                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] rounded-lg  h-auto">
+                    <img src="{% static 'base/assets/img/index5.webp' %}" alt="Image 1" class="w-full h-full rounded-lg object-cover">
                 </div>
                 
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] h-auto rounded-lg ">
+                    <img src="{% static 'base/assets/img/index6.webp' %}" alt="Image 2" class="w-full h-full rounded-lg object-cover">
+                </div>
+                
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] h-auto rounded-lg ">
+                    <img src="{% static 'base/assets/img/index7.webp' %}" alt="Image 3" class="w-full h-full rounded-lg object-cover">
+                </div>
+                
+                <div class="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2 aspect-[2/1] h-auto rounded-lg ">
+                    <img src="{% static 'base/assets/img/index8.webp' %}" alt="Image 4" class="w-full h-full rounded-lg object-cover">
+                </div>
             </div>
+        </div> -->
+
+        <div id="sliderTrack" class="flex"> 
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="1"><img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="2"><img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="3"><img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="4"><img src="{% static 'base/assets/img/index4.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="5"><img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="6"><img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="7"><img src="{% static 'base/assets/img/index7.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="8"><img src="{% static 'base/assets/img/index8.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="1-CLONE"><img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="2-CLONE"><img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="3-CLONE"><img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="4-CLONE"><img src="{% static 'base/assets/img/index4.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="5-CLONE"><img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="6-CLONE"><img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
         </div>
 
  
@@ -73,12 +107,101 @@
 <!-- space for slider  -->
 
 
-<h2>Upcoming Events</h2>
+<h2 class=" mx-10 font-extrabold text-xl">Upcoming Events:</h2>
 {% include 'base/event_component.html' %}
-<a href="{% url 'upcoming_events' %}">See all Upcoming Events</a>
+<a href="{% url 'upcoming_events' %}" class=" mx-10 font-extrabold text-xl">See all Upcoming Events</a>
 <hr>
-<a href="{% url 'past_events' %}">See all Past Events</a>
+<a href="{% url 'past_events' %}" class=" mx-10 font-extrabold text-xl">See all Past Events</a>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sliderTrack = document.getElementById('sliderTrack');
+        
+        // Use the count of ORIGINAL slides (8) not the total elements (8 + 6 = 14)
+        const ORIGINAL_SLIDE_COUNT = 8; 
+        let currentSlide = 0; 
+        const slideInterval = 3500;
+        const SMOOTH_TRANSITION = 'transform 0.5s ease-in-out';
+
+        function getSlidesVisible() {
+            const width = window.innerWidth;
+            
+            // This must match your HTML: lg:w-1/6, md:w-1/4
+            if (width >= 1024) { 
+                return 6; 
+            } else if (width >= 768) {
+                return 4; 
+            } else {
+                return 1; 
+            }
+        }
+
+        function setupSlider() {
+            const slidesVisible = getSlidesVisible();
+            
+            // Track width is based on total elements (ORIGINAL + CLONES)
+            const TOTAL_ELEMENTS = sliderTrack.children.length;
+            const trackWidth = (TOTAL_ELEMENTS / slidesVisible) * 100;
+            sliderTrack.style.width = `${trackWidth}%`;
+            
+            // Reset position
+            currentSlide = 0;
+            sliderTrack.style.transition = 'none';
+            sliderTrack.style.transform = `translateX(0)`;
+        }
+
+        function nextSlide() {
+            const slidesVisible = getSlidesVisible();
+            const shiftAmount = 100 / slidesVisible; 
+            
+            // Max index is based on ORIGINAL count (8) - we reset when currentSlide hits 8
+            const MAX_SHIFT_INDEX = ORIGINAL_SLIDE_COUNT;
+            
+            currentSlide++;
+
+            // Check if we have moved past the last ORIGINAL slide (into the clones)
+            if (currentSlide > MAX_SHIFT_INDEX) {
+                // Step 1: Immediately snap back to the start (no transition)
+                currentSlide = 0;
+                sliderTrack.style.transition = 'none'; 
+                sliderTrack.style.transform = `translateX(0)`; 
+                
+                // Step 2: Re-enable transition after a tiny delay for the next smooth move
+                setTimeout(() => {
+                    currentSlide = 1; // Prepare for the next actual move
+                    sliderTrack.style.transition = SMOOTH_TRANSITION;
+                    let offset = currentSlide * shiftAmount;
+                    sliderTrack.style.transform = `translateX(-${offset}%)`;
+                }, 50); 
+                
+            } else {
+                // Normal transition step
+                sliderTrack.style.transition = SMOOTH_TRANSITION; 
+                let offset = currentSlide * shiftAmount;
+                sliderTrack.style.transform = `translateX(-${offset}%)`;
+            }
+        }
+
+        setupSlider();
+        
+        // Start the automatic sliding interval
+        let sliderIntervalId = setInterval(nextSlide, slideInterval);
+
+        // Resize listener remains the same
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                setupSlider();
+                
+                clearInterval(sliderIntervalId);
+                sliderIntervalId = setInterval(nextSlide, slideInterval);
+            }, 250); 
+        });
+    });
+</script>
+
+<!-- 
 <script>
      document.addEventListener('DOMContentLoaded', () => {
             const sliderTrack = document.getElementById('sliderTrack');
@@ -88,15 +211,17 @@
             const SMOOTH_TRANSITION = 'transform 0.5s ease-in-out';
         
             function getSlidesVisible() {
-                const width = window.innerWidth;
-                if (width >= 1024) {
-                    return 3; 
-                } else if (width >= 768) {
-                    return 2; 
-                } else {
-                    return 1; 
-                }
-            }
+    const width = window.innerWidth;
+    
+    // Tailwind default breakpoints: md: 768px, lg: 1024px
+    if (width >= 1024) { 
+        return 4; // Lg: screens and up (6 slides visible)
+    } else if (width >= 768) {
+        return 2; // Md: screens (4 slides visible)
+    } else {
+        return 1; // Default (mobile)
+    }
+}
         
             function setupSlider() {
                 const slidesVisible = getSlidesVisible();
@@ -151,7 +276,7 @@
             });
         });
 
-  </script>
+  </script> -->
 
 {% endblock content %}
 
