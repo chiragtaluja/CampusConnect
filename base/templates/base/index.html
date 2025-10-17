@@ -8,6 +8,12 @@
     
     {% else %}
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&family=Karma:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
     .text-shadow {
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
@@ -21,20 +27,45 @@
     .slide { width: 100vw; height: 100vh; flex-shrink: 0; position: relative; } 
     .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); } 
     .divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: rgba(255, 255, 255, 0.9); box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); transform: translateX(-50%); z-index: 2; }
+    #sliderTrack::-webkit-scrollbar {
+      display: none;
+    }
+    #sliderTrack {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
      @keyframes slide { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+     .kadwa-regular {
+  font-family: "Kadwa", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.kadwa-bold {
+  font-family: "Kadwa", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.karma-regular {
+  font-family: "Karma", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 </style>
 
 
 
   <div class="bg-white flex flex-col  items-center  text-center px-4 mb-5 ">
     <!-- Title Section -->
-  <h1 class="text-7xl md:text-5xl font-extrabold text-red-600 text-shadow tracking-wide mb-2">
+  <h1 class="kadwa-bold text-2xl lg:text-7xl md:text-5xl  font-extrabold text-red-600 text-shadow tracking-wide mb-2">
     MAHARISHI MARKANDESHWAR
   </h1>
-  <h2 class="text-lg md:text-xl font-semibold text-red-700 italic mb-1">
+  <h2 class="kadwa-regular text-lg md:text-xl font-semibold text-red-700 italic mb-1">
     (DEEMED TO BE UNIVERSITY)
   </h2>
-  <p class="text-lg md:text-xl text-black font-medium mb-8">
+  <p class="kadwa-regular text-lg md:text-xl text-black font-medium mb-8">
     Established under section 3 of the UGC Act. 1956
   </p>
 
@@ -75,7 +106,30 @@
             </div>
         </div> -->
 
-        <div id="sliderTrack" class="flex"> 
+        <!-- <div id="sliderTrack" class="flex border-2 overflow-clip "> 
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="1"><img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="2"><img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="3"><img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="4"><img src="{% static 'base/assets/img/index4.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="5"><img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="6"><img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="7"><img src="{% static 'base/assets/img/index7.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="8"><img src="{% static 'base/assets/img/index8.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="1-CLONE"><img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="2-CLONE"><img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="3-CLONE"><img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="4-CLONE"><img src="{% static 'base/assets/img/index4.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="5-CLONE"><img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+            <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="6-CLONE"><img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
+        </div> -->
+
+        <!-- <div class=" mx-auto">
+
+             <div id="sliderWrapper" class="relative overflow-hidden rounded-lg max-h-[50vh]"> 
+        
+            <div id="sliderTrack" class="flex transition-transform duration-500 ease-in-out"> 
+            
             <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="1"><img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
             <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="2"><img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
             <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="3"><img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
@@ -92,6 +146,61 @@
             <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="5-CLONE"><img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
             <div class="flex-shrink-0 w-full md:w-1/4 lg:w-1/6 p-2 aspect-[2/1] h-auto rounded-lg" data-slide="6-CLONE"><img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover"></div>
         </div>
+    </div>
+</div> -->
+
+    <div class=" mx-auto">
+
+    <div id="sliderWrapper" class="relative overflow-hidden rounded-lg max-h-[50vh]"> 
+        
+        <div id="sliderTrack" class="flex transition-transform duration-500 ease-in-out"> 
+            
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="1">
+                <img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="2">
+                <img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="3">
+                <img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="4">
+                <img src="{% static 'base/assets/img/index4.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="5">
+                <img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="6">
+                <img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="7">
+                <img src="{% static 'base/assets/img/index7.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="8">
+                <img src="{% static 'base/assets/img/index8.webp'}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="1-CLONE">
+                <img src="{% static 'base/assets/img/index1.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="2-CLONE">
+                <img src="{% static 'base/assets/img/index2.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="3-CLONE">
+                <img src="{% static 'base/assets/img/index3.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="4-CLONE">
+                <img src="{% static 'base/assets/img/index4.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="5-CLONE">
+                <img src="{% static 'base/assets/img/index5.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <div class="flex-shrink-0 w-full md:w-1/3 lg:w-1/4 xl:w-1/6 p-2 rounded-lg" data-slide="6-CLONE">
+                <img src="{% static 'base/assets/img/index6.webp' %}" class="w-full h-full rounded-lg object-cover">
+            </div>
+        </div>
+    </div>
+</div>
 
  
 
@@ -114,91 +223,147 @@
 <a href="{% url 'past_events' %}" class=" mx-10 font-extrabold text-xl">See all Past Events</a>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const sliderTrack = document.getElementById('sliderTrack');
+   document.addEventListener('DOMContentLoaded', () => {
+    const sliderTrack = document.getElementById('sliderTrack');
+    
+    // Constants based on your HTML structure
+    const ORIGINAL_SLIDE_COUNT = 8; 
+    const CLONE_COUNT = 6;
+    const TOTAL_ELEMENTS = ORIGINAL_SLIDE_COUNT + CLONE_COUNT; // 14
+    
+    // State variables
+    let currentSlide = 0; // Tracks the current step position (0 to 8)
+    const slideInterval = 3500;
+    const SMOOTH_TRANSITION = 'transform 0.5s ease-in-out';
+
+    // --- Helper Functions ---
+
+    function getSlidesVisible() {
+        const width = window.innerWidth;
         
-        // Use the count of ORIGINAL slides (8) not the total elements (8 + 6 = 14)
-        const ORIGINAL_SLIDE_COUNT = 8; 
-        let currentSlide = 0; 
-        const slideInterval = 3500;
-        const SMOOTH_TRANSITION = 'transform 0.5s ease-in-out';
-
-        function getSlidesVisible() {
-            const width = window.innerWidth;
-            
-            // This must match your HTML: lg:w-1/6, md:w-1/4
-            if (width >= 1024) { 
-                return 6; 
-            } else if (width >= 768) {
-                return 4; 
-            } else {
-                return 1; 
-            }
+        // Must match your Tailwind classes: lg:w-1/6, md:w-1/4, default: w-full (1/1)
+        if (width >= 1024) { 
+            return 6; 
+        } else if (width >= 768) {
+            return 4; 
+        } else {
+            return 1; 
         }
+    }
 
-        function setupSlider() {
-            const slidesVisible = getSlidesVisible();
+    function setupSlider() {
+        const slidesVisible = getSlidesVisible();
+        
+        // Calculate the total width of the track based on how many "step-widths" it contains.
+        // Each element has a width of (100 / slidesVisible)%. The track holds TOTAL_ELEMENTS.
+        const elementWidthPercentage = 100 / slidesVisible;
+        const trackWidth = TOTAL_ELEMENTS * elementWidthPercentage; 
+        sliderTrack.style.width = `${trackWidth}%`;
+        
+        // Reset position to the start of the ORIGINAL slides (currentSlide 0)
+        currentSlide = 0; 
+        sliderTrack.style.transition = 'none';
+        sliderTrack.style.transform = `translateX(0)`;
+    }
+
+    function nextSlide() {
+        const slidesVisible = getSlidesVisible();
+        // The shift amount is the width of ONE slide item in relation to the visible track (100%)
+        const shiftAmount = 100 / slidesVisible; 
+        
+        currentSlide++;
+
+        // 1. Check for Infinite Loop Reset (Moved onto the clones)
+        // We trigger the jump when the next move would show the first clone set.
+        if (currentSlide > ORIGINAL_SLIDE_COUNT) {
             
-            // Track width is based on total elements (ORIGINAL + CLONES)
-            const TOTAL_ELEMENTS = sliderTrack.children.length;
-            const trackWidth = (TOTAL_ELEMENTS / slidesVisible) * 100;
-            sliderTrack.style.width = `${trackWidth}%`;
-            
-            // Reset position
+            // A. Jump back: Snap instantly to the correct starting position (currentSlide = 0)
+            // Remove transition for an immediate visual "snap"
+            sliderTrack.style.transition = 'none'; 
+            sliderTrack.style.transform = `translateX(0)`; 
             currentSlide = 0;
-            sliderTrack.style.transition = 'none';
-            sliderTrack.style.transform = `translateX(0)`;
-        }
 
-        function nextSlide() {
-            const slidesVisible = getSlidesVisible();
-            const shiftAmount = 100 / slidesVisible; 
-            
-            // Max index is based on ORIGINAL count (8) - we reset when currentSlide hits 8
-            const MAX_SHIFT_INDEX = ORIGINAL_SLIDE_COUNT;
-            
-            currentSlide++;
-
-            // Check if we have moved past the last ORIGINAL slide (into the clones)
-            if (currentSlide > MAX_SHIFT_INDEX) {
-                // Step 1: Immediately snap back to the start (no transition)
-                currentSlide = 0;
-                sliderTrack.style.transition = 'none'; 
-                sliderTrack.style.transform = `translateX(0)`; 
-                
-                // Step 2: Re-enable transition after a tiny delay for the next smooth move
-                setTimeout(() => {
-                    currentSlide = 1; // Prepare for the next actual move
-                    sliderTrack.style.transition = SMOOTH_TRANSITION;
-                    let offset = currentSlide * shiftAmount;
-                    sliderTrack.style.transform = `translateX(-${offset}%)`;
-                }, 50); 
-                
-            } else {
-                // Normal transition step
-                sliderTrack.style.transition = SMOOTH_TRANSITION; 
+            // B. Prepare for the next animated move:
+            // Use a slight delay (0ms works, but 50ms ensures render frame separates the snap and the move)
+            setTimeout(() => {
+                // Now, execute the move to the NEXT slide (original slide 1)
+                currentSlide = 1; 
+                sliderTrack.style.transition = SMOOTH_TRANSITION;
                 let offset = currentSlide * shiftAmount;
                 sliderTrack.style.transform = `translateX(-${offset}%)`;
-            }
+            }, 50); 
+            
+        } else {
+            // 2. Normal Smooth Slide
+            sliderTrack.style.transition = SMOOTH_TRANSITION; 
+            let offset = currentSlide * shiftAmount;
+            sliderTrack.style.transform = `translateX(-${offset}%)`;
         }
+    }
 
-        setupSlider();
-        
-        // Start the automatic sliding interval
-        let sliderIntervalId = setInterval(nextSlide, slideInterval);
+    // --- Execution ---
 
-        // Resize listener remains the same
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                setupSlider();
-                
-                clearInterval(sliderIntervalId);
-                sliderIntervalId = setInterval(nextSlide, slideInterval);
-            }, 250); 
-        });
+    setupSlider();
+    
+    // Start the automatic sliding interval
+    let sliderIntervalId = setInterval(nextSlide, slideInterval);
+
+    // Resize listener (Debounce is good practice)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            // Re-setup slider (resets track width and position)
+            setupSlider();
+            
+            // Restart the interval to ensure it uses the new slidesVisible calculation
+            clearInterval(sliderIntervalId);
+            sliderIntervalId = setInterval(nextSlide, slideInterval);
+        }, 250); 
     });
+});
+
+function getVisibleCount() {
+    // 🟢 CHANGE: If screen is smaller than 768px (md), return 1
+    if (window.innerWidth < 768) return 1; // w-full on mobile
+    
+    if (window.innerWidth >= 1280) return 6; // xl:w-1/6
+    if (window.innerWidth >= 1024) return 4; // lg:w-1/4
+    // Screens between 768px and 1024px
+    return 3;  // md:w-1/3
+}
+
+function updateSliderPosition() {
+    const visibleCount = getVisibleCount();
+    
+    // Calculate the width of one slide: 100% / 1 = 100% (for mobile)
+    const slideWidthPercentage = 100 / visibleCount; 
+    
+    const offset = currentIndex * slideWidthPercentage;
+    
+    // Apply the transformation
+    sliderTrack.style.transform = `translateX(-${offset}%)`;
+
+    // ... (rest of the infinite loop logic remains the same) ...
+    // --- Infinite Loop Logic (Jumping to Clone) ---
+    if (currentIndex >= totalSlides) {
+        setTimeout(() => {
+            sliderTrack.style.transition = 'none';
+            // The jump index logic needs to be robust for all counts:
+            // For a continuous loop, if we advance past the last true item (index 7), 
+            // we jump back to the start (index 0).
+            currentIndex = 0; 
+            sliderTrack.style.transform = `translateX(-${currentIndex * slideWidthPercentage}%)`;
+            
+            // Re-enable transition after the jump
+            setTimeout(() => {
+                sliderTrack.style.transition = 'transform 0.5s ease-in-out';
+            }, 50);
+        }, 500); // Wait for the transition duration to complete
+    }
+}
+
+// ... (rest of the autoAdvance and resize event listeners) ...
 </script>
 
 <!-- 

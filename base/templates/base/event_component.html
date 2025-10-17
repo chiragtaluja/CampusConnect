@@ -2,17 +2,28 @@
 
 {% load static tailwind_tags %}
 {% load static %}
-<ul class="event grid grid-cols-1 mx-10 mt-5 rounded-2xl bg-gray-100  gap-y-10 gap-x-6  p-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&family=Karma:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+.karma-regular {
+  font-family: "Karma", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-    <li class="relative flex flex-col sm:flex-row  items-start">
+</style>
+<ul class="event grid grid-cols-1 mx-10 mt-5 rounded-2xl bg-gray-100 shadow-lg gap-y-10 gap-x-6  p-8">
+
+    <li class="relative flex flex-col sm:flex-row  items-start border-b border-red-200 pb-6 last:border-b-0 ">
         <a href="{% url 'event' event.id %}">
 
             <div class="order-1 sm:ml-6 ">
-                <h3 class="mb-1 text-slate-900 font-semibold">
-                    <span class="mb-1 block text-sm leading-6  text-indigo-500">{{ event.day }}</span>{{ event.name }}
+                <h3 class="mb-1 text-slate-900 font-semibold md:text-2xl text-xl karma-regular">
+                    <span class="mb-1 block text-sm leading-6 font-medium text-red-600 karma-regular">{{ event.day }}</span>{{ event.name }}
                 </h3>
                 <div class="prose prose-slate prose-sm text-slate-600">
-                    <p>{{ event.description|truncatewords:30 }}</p>
+                    <p>{{ event.description|truncatewords:40 }}</p>
                 </div><a
                     class="group inline-flex items-center h-9 rounded-full text-sm font-semibold whitespace-nowrap px-3 focus:outline-none focus:ring-2 bg-red-500 text-white hover:bg-red-600  focus:ring-slate-500 mt-6"
                     href="{% url 'event' event.id %}">Learn
@@ -24,7 +35,7 @@
                     </svg></a>
 
         </a>
-        <!-- Dropdown button -->
+       
         {% if request.user == event.created_by %}
         <button class="dropdown-btn p-2 absolute top-2 right-4 cursor-pointer  focus:outline-none">
             <svg class="w-5 h-5 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -34,7 +45,7 @@
             </svg>
         </button>
 
-        <!-- Dropdown menu -->
+        
         <div
             class="dropdown-menu  absolute top-12 right-4 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 dark:divide-gray-600 opacity-0 scale-95 transition-all duration-200 origin-top">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
@@ -76,19 +87,19 @@
         const btn = event.target.closest('.dropdown-btn');
         const allDropdowns = document.querySelectorAll('.dropdown-menu');
 
-        // If a dropdown button was clicked
+      
         if (btn) {
             const dropdown = btn.nextElementSibling;
             const isHidden = dropdown.classList.contains('hidden');
 
-            // Hide all dropdowns first
+           
             allDropdowns.forEach(drop => {
                 if (drop !== dropdown) {
                     drop.classList.add('hidden', 'opacity-0', 'scale-95');
                 }
             });
 
-            // Toggle the clicked dropdown
+          
             if (isHidden) {
                 dropdown.classList.remove('hidden', 'opacity-0', 'scale-95');
             } else {
@@ -96,7 +107,7 @@
                 setTimeout(() => dropdown.classList.add('hidden'), 200);
             }
         } else {
-            // If the click was not on a button, hide all dropdowns
+           
             allDropdowns.forEach(drop => {
                 drop.classList.add('opacity-0', 'scale-95');
                 setTimeout(() => drop.classList.add('hidden'), 200);
@@ -104,3 +115,5 @@
         }
     });
 </script>
+
+
