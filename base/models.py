@@ -10,20 +10,16 @@ class Subscriber(models.Model):
 
 
 class Event(models.Model):
-    # Basic Info
-    name = models.CharField(max_length=200)  # Event name
-    headline = models.CharField(max_length=300)  # Event headline / tagline
+    name = models.CharField(max_length=200)  
+    headline = models.CharField(max_length=300)  
 
-    # Date & Time
-    day = models.DateField()  # Event day
-    time = models.TimeField()  # Event time
-    deadline = models.DateTimeField()  # Registration deadline
+    day = models.DateField() 
+    time = models.TimeField()  
+    deadline = models.DateTimeField()  
 
-    # Content
-    rules = models.TextField()  # Rules & regulations
-    description = models.TextField()  # Description (min 300 words validation can be added later)
+    rules = models.TextField() 
+    description = models.TextField() 
 
-    # Venue & Department
     venue = models.CharField(max_length=200)
     DEPARTMENTS = [
         ("CSE", "Computer Science & Engineering"),
@@ -46,12 +42,11 @@ class Event(models.Model):
     ]
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES , default="Technical")
 
-    # Coordinator Info
     coordinator_name = models.CharField(max_length=150,blank=True , null=True)
-    contact_info = models.CharField(max_length=100 , blank=True , null=True)  # phone/email
+    contact_info = models.CharField(max_length=100 , blank=True , null=True) 
 
     # Links
-    registration_link = models.URLField(blank=True, null=True)  # Google form
+    registration_link = models.URLField(blank=True, null=True) 
     whatsapp_link = models.URLField(blank=True, null=True)
 
     # Poster

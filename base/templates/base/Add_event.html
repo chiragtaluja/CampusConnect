@@ -2,9 +2,7 @@
 {% load static tailwind_tags %}
 {% load static %}
 
-
 {% block content %}
-
 
 <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
 <style>
@@ -42,14 +40,14 @@
 
                 <!-- Header -->
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">{% if is_update %} Update Event {% else %} Create Event {% endif %}</h1>
+            <h1 class="text-3xl font-bold text-gray-800">Create Event</h1>
             <p class="text-gray-600 mt-2">Fill in the details below to create your event</p>
         </header>
 
          <!-- Main Form -->
 
-    
-        <form method="POST" enctype="multipart/form-data " class="bg-white rounded-xl  shadow-sm p-6">
+
+        <form  id="eventForm" method="POST" enctype="multipart/form-data" class="bg-white rounded-xl  shadow-sm p-6">
             {% csrf_token %}
 
             <!-- Event Name -->
@@ -104,18 +102,16 @@
 
             <hr class="my-8">
 
-            <!-- Description Section -->
-            <div class="mb-8">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Event Description</h2>
-                <textarea id="rules" name="description"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add description" required>{{ event.description|default:'' }}</textarea>
-            </div>
-
             <!-- Rules & Regulations Section -->
             <div class="mb-8">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Rules & Regulations</h2>
                 <textarea id="rules" name="rules" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add Rules" required>{{ event.rules|default:'' }}</textarea>
             </div>
-            
+            <!-- Description Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Event Description</h2>
+                <textarea id="rules" name="description"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add description" required>{{ event.description|default:'' }}</textarea>
+            </div>
 
 
             <hr class="my-8">
@@ -157,12 +153,12 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label for="coordinatorName" name="coordinator_name" class="block text-gray-700 font-medium mb-2">Name</label>
-                        <input type="text" id="coordinatorName" value="{{ event.coordinator_name|default:'' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter coordinator name">
+                       <input type="text" id="coordinatorName" name="coordinator_name" value="{{ event.coordinator_name }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter coordinator name">
                     </div>
                     
                     <div>
                         <label for="contactInfo" name="contact_info" class="block text-gray-700 font-medium mb-2">Contact Info</label>
-                        <input type="text" id="contactInfo" value="{{ event.contact_info|default:'' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter contact information">
+                        <input type="text" id="contactInfo" name="contact_info" value="{{ event.contact_info|default:'' }}" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter contact information">
                     </div>
                 </div>
 
@@ -199,7 +195,7 @@
                     <p class="text-gray-600 mb-2">Upload your event poster</p>
                     <p class="text-gray-500 text-sm">PNG, JPG, GIF up to 10MB</p>
                     <button type="button" id="uploadPoster" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">Choose File</button>
-                    <input type="file" name="poster"  id="posterFile" class="hidden" accept="image/*">
+                    <input type="file" name="poster" id="posterFile" class="hidden" accept="image/*">
                 </div>
                 
                 <!-- Preview Container (hidden by default) -->
@@ -315,44 +311,43 @@
         });
 
         function handleFiles(files) {
-            if (files.length > 0) {
-                const file = files[0];
-                
-                // Check if file is an image
-                if (!file.type.match('image.*')) {
-                    alert('Please select an image file (PNG, JPG, GIF)');
-                    return;
-                }
-                
-                // Check file size (10MB limit)
-                if (file.size > 10 * 1024 * 1024) {
-                    alert('File size exceeds 10MB limit');
-                    return;
-                }
-                
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    // Update the upload area
-                    uploadArea.innerHTML = `
-                        <div class="flex flex-col items-center justify-center">
-                            <i class="fas fa-check-circle text-green-500 text-4xl mb-3"></i>
-                            <p class="text-gray-700 font-medium">Poster uploaded successfully!</p>
-                            <p class="text-gray-500 text-sm mt-1">${file.name}</p>
-                        </div>
-                    `;
-                    
-                    // Show preview
-                    const previewContainer = document.getElementById('previewContainer');
-                    const posterPreview = document.getElementById('posterPreview');
-                    
-                    posterPreview.src = e.target.result;
-                    previewContainer.classList.remove('hidden');
-                };
-                
-                reader.readAsDataURL(file);
-            }
+    if (files.length > 0) {
+        const file = files[0];
+
+        // Check if file is an image
+        if (!file.type.match('image.*')) {
+            alert('Please select an image file (PNG, JPG, GIF)');
+            return;
         }
+
+        // Check file size (10MB limit)
+        if (file.size > 10 * 1024 * 1024) {
+            alert('File size exceeds 10MB limit');
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            // Show preview container
+            const previewContainer = document.getElementById('previewContainer');
+            const posterPreview = document.getElementById('posterPreview');
+            posterPreview.src = e.target.result;
+            previewContainer.classList.remove('hidden');
+
+            // Optional: show uploaded message
+            let uploadMsg = uploadArea.querySelector('.upload-message');
+            if (!uploadMsg) {
+                uploadMsg = document.createElement('p');
+                uploadMsg.className = 'upload-message text-gray-700 font-medium mt-2';
+                uploadArea.appendChild(uploadMsg);
+            }
+            uploadMsg.textContent = `Selected Poster: ${file.name}`;
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
 
         // Change poster functionality
         document.getElementById('changePoster').addEventListener('click', function() {
@@ -378,7 +373,6 @@
 
         // Form submission
         document.getElementById('eventForm').addEventListener('submit', function(e) {
-            e.preventDefault();
             
             // Basic validation
             const eventName = document.getElementById('eventName').value;

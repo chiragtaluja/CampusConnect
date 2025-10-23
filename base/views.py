@@ -10,18 +10,10 @@ from email.mime.image import MIMEImage
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import date
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from .models import Event
-
-from django.shortcuts import render
-from django.db.models import Q
-from .models import Event
-
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 import datetime
-
+from .utils import send_email_async
 
 def index(request):
     q = request.GET.get("q", "")
@@ -56,14 +48,6 @@ def subscribe(request):
             messages.success(request, "Subscription successful!")
 
     return redirect("index")
-
-
-from django.shortcuts import render
-from django.conf import settings
-from .models import Event, Subscriber
-from .utils import send_email_async
-from django.template.loader import render_to_string
-
 
 @login_required(login_url="user_login")
 def add_event(request):
@@ -219,15 +203,13 @@ def update_event(request, event_id):
         # Update poster if provided
         if "poster" in request.FILES:
             event.poster = request.FILES["poster"]
-
         # Save the updated event
         event.save()
         return redirect("admin_dashboard", admin_id=request.user.id)
 
-    # GET request (show the pre-filled form)
     context = {
         "event": event,
-        "is_update": True,  # To know this is an update form
+        "is_update": True, 
     }
     return render(request, "base/add_event.html", context)
 
