@@ -16,7 +16,7 @@
 
     <div class="w-full flex flex-col items-center justify-center">
         <h1 class="text-5xl md:text-6xl font-extrabold text-red-600 drop-shadow-lg tracking-wide mb-6 text-shadow">{{ event.name }}</h1>
-        <h3 class="text-3xl md:text-5xl  font-extrabold text-black drop-shadow-md leading-snug max-w-5xl text-shadow">{{ event.headline }}</h3>
+        <h3 class="text-3xl md:text-5xl font-extrabold text-black drop-shadow-md leading-snug max-w-5xl text-shadow text-center">{{ event.headline }}</h3>
 
         <!-- <div class="flex border-2" >
             <p class=" p-5 ml-5 border-amber-100 border-2  ">{{ event.day }}</p>
@@ -34,10 +34,7 @@
                     <!-- Right Side (Venue) -->
                     <div class="flex-1 flex flex-col justify-center items-start pl-8 text-left">
                     <p class="text-xl md:text-2xl font-bold text-red-600 ">
-                        MAHARISHI MARKANDESHWAR UNIVERSITY
-                    </p>
-                    <p class="text-xl font-semibold text-red-600">
-                        MULLANA, AMBALA
+                        MAHARISHI MARKANDESHWAR (Deemed to be University)
                     </p>
                     </div>
             </div>
@@ -65,7 +62,7 @@
         <h3 class="text-3xl font-extrabold text-gray-800 mb-2">
             {{ event.headline }}
         </h3>
-        <p class="text-base text-gray-600 leading-relaxed">
+        <p class="text-base text-gray-600 leading-relaxed" style="white-space: pre-line">
             {{ event.description }}
         </p>
     </div>
@@ -76,7 +73,7 @@
         <h3 class="text-xl font-bold text-red-600 mb-3 border-l-4 border-red-600 pl-3">
             Rules & Regulations
         </h3>
-        <div class="text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <div class="text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-200" style="white-space: pre-line">
             {{ event.rules }}
         </div>
     </div>
@@ -151,13 +148,7 @@
     <h3 class="font-bold text-lg">Coordinators Details</h3>
     <p><strong>Coordinator Name:</strong> {{ event.coordinator_name }}</p>
     <p><strong>Contact Info:</strong> {{ event.contact_info }}</p>
-
     </div>
-
-    
-
-    
-
-    <p>{{ event.created_by }}</p>
+    <!-- <p>{{ event.created_by }}</p> -->
 </div>
 {% endblock %}
