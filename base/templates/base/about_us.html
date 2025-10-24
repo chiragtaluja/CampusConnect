@@ -1,4 +1,6 @@
+
 {% extends 'main.html' %}
+{% load static %}
 {% block content %}
 
 <body class="bg-gray-50 font-sans antialiased">
@@ -49,7 +51,7 @@
             <h2 class="text-3xl font-bold text-gray-800 border-b-2 border-red-600 pb-2 mb-8">
                 Team Behind CampusConnect
             </h2>
-
+<!-- 
             <ul class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <a href="https://www.linkedin.com/in/kavyaggarwal/">
                     <li
@@ -79,7 +81,131 @@
                         <p class="text-gray-600 text-sm italic">Frontend Developer</p>
                     </li>
                 </a>
-            </ul>
+            </ul> -->
+          
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            
+    <li class="relative bg-white rounded-xl shadow-lg overflow-hidden 
+               transform hover:scale-[1.05] transition duration-300 group 
+               min-h-[8rem]"> 
+        <a href="https://www.linkedin.com/in/kavyaggarwal/" class="block h-full">
+            
+            <div class="p-6 border-t-8 border-red-300 group-hover:border-red-600 transition duration-300 
+                        flex items-center space-x-6 h-full relative">
+                
+                <div class="absolute top-0 left-0 h-full flex items-center 
+                            transform -translate-x-full group-hover:translate-x-0 
+                            transition-transform duration-300 ease-in-out z-10">
+                    <img src="{% static 'base/assets/img/team/kavya.jpeg' %}" alt="Kavya Aggarwal Profile" 
+                         class="w-16 h-16 rounded-full object-cover flex-shrink-0 border-2 border-red-600  shadow-md ml-6">
+                </div>
+                
+                <div class="absolute top-0 right-0 h-full w-1/3 rounded-l-3xl bg-red-600 text-white p-4 
+                            flex items-center justify-center text-sm italic font-medium text-center
+                            transform translate-x-full group-hover:translate-x-7 
+                            transition-transform duration-300 ease-in-out z-20 ">
+                    "Leadership is not about status, it's about service."
+                </div>
+                
+                <div class="transition-all duration-300 ease-in-out group-hover:ml-16">
+                    <p class="text-2xl font-bold text-gray-800">Kavya Aggarwal</p>
+                    <p class="text-red-600 text-base italic">Team Leader</p>
+                </div>
+            </div>
+        </a>
+    </li>
+    
+    <li class="relative bg-white rounded-xl shadow-lg overflow-hidden 
+               transform hover:scale-[1.05] transition duration-300 group 
+               min-h-[8rem]">
+        <a href="https://www.linkedin.com/in/chirag-taluja-04f03/" class="block h-full">
+            
+            <div class="p-6 border-t-8 border-red-300 group-hover:border-red-600 transition duration-300 
+                        flex items-center space-x-6 h-full relative">
+                
+                <div class="absolute top-0 left-0 h-full flex items-center 
+                            transform -translate-x-full group-hover:translate-x-0 
+                            transition-transform duration-300 ease-in-out z-10">
+                    <img src="{% static 'base/assets/img/team/chirag.jpeg' %}" alt="Chirag Taluja Profile" 
+                         class="w-16 h-16 rounded-full object-cover flex-shrink-0 border-2 border-red-500 shadow-md ml-6">
+                </div>
+
+                <div class="absolute top-0 right-0 h-full w-1/3 rounded-l-3xl  bg-red-600 text-white p-4 
+                            flex items-center justify-center text-sm italic font-medium text-center
+                            transform translate-x-full group-hover:translate-x-7 
+                            transition-transform duration-300 ease-in-out z-20">
+                    "The best code is the one you don't have to write."
+                </div>
+                
+                <div class="transition-all duration-300 ease-in-out group-hover:ml-16">
+                    <p class="text-2xl font-bold text-gray-800">Chirag Taluja</p>
+                    <p class="text-red-600 text-base italic">Backend Developer</p>
+                </div>
+            </div>
+            
+        </a>
+    </li>
+
+    <li class="relative bg-white rounded-xl shadow-lg overflow-hidden 
+               transform hover:scale-[1.05] transition duration-300 group 
+               min-h-[8rem]">
+        <a href="#" class="block h-full">
+            
+            <div class="p-6 border-t-8 border-red-300 group-hover:border-red-600 transition duration-300 
+                        flex items-center space-x-6 h-full relative">
+                
+                <div class="absolute top-0 left-0 h-full flex items-center 
+                            transform -translate-x-full group-hover:translate-x-0 
+                            transition-transform duration-300 ease-in-out z-10">
+                    <img src="{% static 'base/assets/img/team/bhavya.jpeg'  %}" alt="Bhavya Dhawan Profile" 
+                         class="w-16 h-16 rounded-full object-cover flex-shrink-0 border-2 border-red-500 shadow-md ml-6">
+                </div>
+
+                <div class="absolute top-0 right-0 h-full w-1/3 rounded-l-3xl bg-red-600 text-white p-4 
+                            flex items-center justify-center text-sm italic font-medium text-center
+                            transform translate-x-full group-hover:translate-x-7 
+                            transition-transform duration-300 ease-in-out z-20">
+                    "Design is not just what it looks like, it's how it works."
+                </div>
+                
+                <div class="transition-all duration-300 ease-in-out group-hover:ml-16">
+                    <p class="text-2xl font-bold text-gray-800">Bhavya Dhawan</p>
+                    <p class="text-red-600 text-base italic">Frontend Developer</p>
+                </div>
+            </div>
+        </a>
+    </li>
+
+    <li class="relative bg-white rounded-xl shadow-lg overflow-hidden 
+               transform hover:scale-[1.05] transition duration-300 group 
+               min-h-[8rem]">
+        <a href="#" class="block h-full">
+            
+            <div class="p-6 border-t-8 border-red-300 group-hover:border-red-600 transition duration-300 
+                        flex items-center space-x-6 h-full relative">
+                
+                <div class="absolute top-0 left-0 h-full flex items-center 
+                            transform -translate-x-full group-hover:translate-x-0 
+                            transition-transform duration-300 ease-in-out z-10">
+                    <img src="{% static 'base/assets/img/team/IMG_1784.HEIC' %}" alt="Suhani Thapa Profile" 
+                         class="w-16 h-16 rounded-full object-cover flex-shrink-0 border-2 border-red-500 shadow-md ml-6">
+                </div>
+
+                <div class="absolute top-0 right-0 h-full w-1/3 rounded-l-3xl bg-red-600 text-white p-4 
+                            flex items-center justify-center text-sm italic font-medium text-center
+                            transform translate-x-full group-hover:translate-x-7 
+                            transition-transform duration-300 ease-in-out z-20">
+                    "Accessibility is the foundation of great front-end design."
+                </div>
+                
+                <div class="transition-all duration-300 ease-in-out group-hover:ml-16">
+                    <p class="text-2xl font-bold text-gray-800">Suhani Thapa</p>
+                    <p class="text-red-600 text-base italic">Frontend Developer</p>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
         </section>
 
     </div>
