@@ -11,7 +11,7 @@
 
 </head>
 
-<body class=" ">
+<body class=" {% if event_count < 2 %} hidden {% endif %}">
 
     {% include 'navbar.html' %}
     {% block content %}

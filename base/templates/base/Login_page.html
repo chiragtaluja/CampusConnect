@@ -2,21 +2,17 @@
 {% load static %}
 
 <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+<!-- 
+
+-->
+
 
 <style>
-  /* .LoginBg {
+  .LoginBg {
     background-image: url("{% static 'base/assets/img/design_login_page.jpg' %}");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-  } */
-
-   .LoginBg {
-    background-image: url("{% static 'base/assets/img/design_login_page.jpg' %}");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* Adding a subtle dark overlay to help the light login box stand out */
     position: relative; 
     z-index: 1;
   }
@@ -27,126 +23,55 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* 20% Black overlay */
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: -1;
   }
 </style>
 
-<!-- <div class="LoginBg flex justify-center items-start border-2 min-h-screen ">
+<div class="LoginBg flex justify-center items-center min-h-screen px-4 py-8">
    
-       
-
-      
-<div class=" rounded-2xl bg-[#61bde7]/90 text-white flex mt-5  flex-col items-center  sm:justify-center sm:pt-0">
-    
-    <div class="relative my-5 w-full max-w-lg sm:mt-2">
-        <div class="relative -mb-px h-px w-full bg-gradient-to-r from-transparent via-sky-300 to-transparent"
-            bis_skin_checked="1"></div>
-        <div
-            class="mx-5 border dark:border-b-white/50 dark:border-t-white/50 border-b-white/20 sm:border-t-white/20 shadow-[20px_0_20px_20px] shadow-slate-500/10 dark:shadow-white/20 rounded-lg border-white/20 border-l-white/20 border-r-white/20 sm:shadow-sm lg:rounded-xl lg:shadow-none">
-            <div class="flex flex-col p-6">
-                <h3 class="text-xl font-semibold leading-6 tracking-tighter">Login</h3>
-                <p class="mt-1.5 text-sm font-medium text-white/50">Welcome back, enter your credentials to continue.
-                </p>
-            </div>
-            <div class="p-6 pt-0">
-                <form method="post" action="{% url 'user_login' %}">
-                   {% csrf_token %}
-                    <div>
-                        <div>
-                            <div
-                                class="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
-                                <div class="flex justify-between">
-                                    <label
-                                        class="text-xs font-medium text-muted-foreground group-focus-within:text-white text-black">Username</label>
-                                    
-                                </div>
-                                <input type="text" name="username" placeholder="Username"
-                                    autocomplete="off"
-                                    class="block w-full bg-gray-200/40  rounded-lg  py-0 px-2  text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <div>
-                            <div
-                                class="group relative rounded-lg border focus-within:border-sky-200 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
-                                <div class="flex justify-between">
-                                    <label
-                                        class="text-xs font-medium text-muted-foreground group-focus-within:text-white text-black">Password</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input type="password" name="password"
-                                        class="block w-full bg-gray-200/40 rounded-lg  py-0 px-2  text-sm file:my-1 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 sm:leading-7 text-foreground">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <div class="mt-4 flex items-center justify-end gap-x-2">
-                       
-                        <button
-                            class="font-semibold hover:bg-red-600 hover:text-white hover:ring hover:ring-white transition duration-300 inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black h-10 px-4 py-2"
-                            type="submit">Log in</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> 
-    
-</div> -->
-
-
-<div class="LoginBg flex justify-center items-start border-2 min-h-screen">
-   
-    <div class="rounded-2xl bg-[#2a7b9f] text-gray-100 flex mt-10  flex-col items-center shadow-2xl sm:justify-center sm:pt-0">
+    <div class="rounded-2xl bg-white flex flex-col items-center shadow-2xl w-full max-w-md">
         
-        <div class="relative my-5 w-full max-w-xl sm:mt-2">
+        <div class="relative w-full">
             
-            <div class="mx-5 p-6 border border-sky-400/30 rounded-lg shadow-xl shadow-sky-900/40">
+            <div class="p-6 sm:p-8 md:p-10">
                 <div class="flex flex-col">
-                    <h3 class="text-3xl font-bold leading-6 tracking-tighter text-white">Sign In</h3>
-                    <p class="mt-1.5 text-sm font-medium text-gray-200/80">Welcome back! Please log in to continue.
-                    </p>
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight text-black">Sign In</h3>
+                    <p class="mt-2 text-sm sm:text-base text-gray-600">Welcome back! Please log in to continue.</p>
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6 sm:mt-8">
                     <form method="post" action="{% url 'user_login' %}">
                         {% csrf_token %}
                         
-                        <div class="mb-4">
-                            <div
-                                class="group relative rounded-lg border border-sky-500/50 focus-within:border-sky-300 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
+                        <div class="mb-4 sm:mb-5">
+                            <div class="group relative rounded-lg border-2 border-gray-300 focus-within:border-red-500 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring-2 focus-within:ring-red-500/30">
                                 <div class="flex justify-between">
-                                    <label
-                                        class="text-xs font-semibold text-sky-300 group-focus-within:text-sky-100">Username</label>
+                                    <label class="text-xs sm:text-sm font-semibold text-gray-700 group-focus-within:text-red-600">Username</label>
                                 </div>
                                 <input type="text" name="username" placeholder="Enter username"
                                     autocomplete="off"
-                                    class="block w-full bg-white/10 text-white rounded-lg py-1 px-2 text-sm placeholder:text-gray-300/50 focus:outline-none focus:ring-0 sm:leading-7">
+                                    class="block w-full bg-transparent text-black rounded-lg py-1.5 sm:py-2 px-2 text-sm sm:text-base placeholder:text-gray-400 focus:outline-none focus:ring-0 sm:leading-7">
                             </div>
                         </div>
                         
-                        <div class="mt-4">
-                            <div
-                                class="group relative rounded-lg border border-sky-500/50 focus-within:border-sky-300 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring focus-within:ring-sky-300/30">
+                        <div class="mt-4 sm:mt-5">
+                            <div class="group relative rounded-lg border-2 border-gray-300 focus-within:border-red-500 px-3 pb-1.5 pt-2.5 duration-200 focus-within:ring-2 focus-within:ring-red-500/30">
                                 <div class="flex justify-between">
-                                    <label
-                                        class="text-xs font-semibold text-sky-300 group-focus-within:text-sky-100">Password</label>
+                                    <label class="text-xs sm:text-sm font-semibold text-gray-700 group-focus-within:text-red-600">Password</label>
                                 </div>
                                 <div class="flex items-center">
                                     <input type="password" name="password" placeholder="Enter password"
-                                        class="block w-full bg-white/10 text-white rounded-lg py-1 px-2 text-sm placeholder:text-gray-300/50 focus:outline-none focus:ring-0 sm:leading-7">
+                                        class="block w-full bg-transparent text-black rounded-lg py-1.5 sm:py-2 px-2 text-sm sm:text-base placeholder:text-gray-400 focus:outline-none focus:ring-0 sm:leading-7">
                                 </div>
                             </div>
                         </div>
                        
-                        <div class="mt-8 flex items-center justify-end gap-x-2">
+                        <div class="mt-6 sm:mt-8 flex items-center justify-end gap-x-2">
                             <button
-                                class="font-semibold inline-flex items-center justify-center rounded-md text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 
-                                       bg-sky-500 text-white shadow-lg shadow-sky-500/50 
-                                       hover:bg-sky-600 transition duration-300 h-10 px-6 py-2"
+                                class="font-semibold inline-flex items-center justify-center rounded-md text-sm sm:text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 
+                                       bg-red-600 text-white shadow-lg shadow-red-600/50 
+                                       hover:bg-red-700 active:bg-red-800 transition duration-300 h-10 sm:h-11 px-6 sm:px-8 py-2 w-full sm:w-auto"
                                 type="submit">
                                 Log in
                             </button>
@@ -157,5 +82,3 @@
         </div>
     </div> 
 </div>
-
-

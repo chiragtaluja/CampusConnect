@@ -40,7 +40,7 @@
 
                 <!-- Header -->
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Create Event</h1>
+            <h1 class="text-3xl font-bold text-gray-800">{% if is_update %} Update Event {% else %} Create Event {% endif %}</h1>
             <p class="text-gray-600 mt-2">Fill in the details below to create your event</p>
         </header>
 
@@ -101,18 +101,19 @@
     </div>
 
             <hr class="my-8">
+              <!-- Description Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Event Description</h2>
+                <textarea id="rules" name="description"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add description" required>{{ event.description|default:'' }}</textarea>
+            </div>
+
 
             <!-- Rules & Regulations Section -->
             <div class="mb-8">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Rules & Regulations</h2>
                 <textarea id="rules" name="rules" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add Rules" required>{{ event.rules|default:'' }}</textarea>
             </div>
-            <!-- Description Section -->
-            <div class="mb-8">
-                <h2 class="text-xl font-semibold text-gray-800 mb-4">Event Description</h2>
-                <textarea id="rules" name="description"  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[120px]" placeholder="Add description" required>{{ event.description|default:'' }}</textarea>
-            </div>
-
+          
 
             <hr class="my-8">
             

@@ -15,25 +15,22 @@
 <div class="event-detail flex flex-col ">
 
     <div class="w-full flex flex-col items-center justify-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold text-red-600 drop-shadow-lg tracking-wide mb-6 text-shadow">{{ event.name }}</h1>
-        <h3 class="text-3xl md:text-5xl font-extrabold text-black drop-shadow-md leading-snug max-w-5xl text-shadow text-center">{{ event.headline }}</h3>
+        <h1 class="text-2xl sm:text-4xl md:text-6xl font-extrabold text-red-600 drop-shadow-lg tracking-wide mb-4 sm:mb-6 text-shadow">{{ event.name }}</h1>
+        <h3 class="text-2xl sm:text-3xl md:text-5xl font-extrabold text-black drop-shadow-md leading-snug max-w-5xl text-shadow text-center">{{ event.headline }}</h3>
 
-        <!-- <div class="flex border-2" >
-            <p class=" p-5 ml-5 border-amber-100 border-2  ">{{ event.day }}</p>
-            <p class="text-[10px]  text-red-600 py-5 border-2 border-amber-900"> Maharishi Markandeshwar University <br> Mullana,Ambala,Haryana          </p>
-        </div> -->
+        
            <div class="relative flex items-center justify-center mt-2 w-full max-w-4xl">
                     <!-- Center Divider Line -->
                     <div class="absolute left-1/2 transform -translate-x-1/2 h-16 w-px bg-gray-400"></div>
 
                     <!-- Left Side (Date) -->
                     <div class="flex-1 flex justify-end pr-8">
-                    <p class="text-2xl font-bold text-red-600">{{ event.day }}</p>
+                    <p class="text-sm sm:text-lg md:text-2xl font-bold text-red-600">{{ event.day }}</p>
                     </div>
 
                     <!-- Right Side (Venue) -->
                     <div class="flex-1 flex flex-col justify-center items-start pl-8 text-left">
-                    <p class="text-xl md:text-2xl font-bold text-red-600 ">
+                    <p class="text-sm sm:text-lg md:text-2xl font-bold text-red-600 ">
                         MAHARISHI MARKANDESHWAR (Deemed to be University)
                     </p>
                     </div>
@@ -41,20 +38,7 @@
     </div>
     
 <div class="flex flex-col mx-10 mt-5 gap-2">
-    <!-- <h3 class="font-bold text-lg">{{ event.headline }}</h3>
-    <p>{{ event.description }}</p>
-
-    <h3 class="font-bold text-lg " >Rules & Regulations</h3>
-    <p>{{ event.rules }}</p>
-    <hr class="text-gray-500">
-
-    <p><strong>Venue:</strong> {{ event.venue }}</p>
-    <p><strong>Date:</strong> {{ event.day }}</p>
-    <p><strong>Time:</strong> {{ event.time }}</p>
-    <p><strong>Deadline:</strong> {{ event.deadline }}</p>
     
-    <p><strong>Organised by:</strong> {{ event.department }}</p>
-    <p><strong>Event Category:</strong> {{ event.category }}</p> -->
 
     <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-100 max-w-[90vw] mx-auto">
     
@@ -119,7 +103,7 @@
 
     <hr class="text-gray-500">
 
-    {% if event.registration_link %}
+    <!-- {% if event.registration_link %}
     
     
 
@@ -148,7 +132,53 @@
     <h3 class="font-bold text-lg">Coordinators Details</h3>
     <p><strong>Coordinator Name:</strong> {{ event.coordinator_name }}</p>
     <p><strong>Contact Info:</strong> {{ event.contact_info }}</p>
-    </div>
+    </div> -->
     <!-- <p>{{ event.created_by }}</p> -->
+
+    <div class="flex flex-col mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-5 gap-6">
+
+    <hr class="my-4 border-gray-300">
+
+    <div class="flex flex-col sm:flex-row gap-4 mb-8 justify-center items-center">
+
+        {% if event.registration_link %}
+        <a href="{{ event.registration_link }}" target="_blank" class="w-full sm:w-auto max-w-xs md:max-w-sm">
+            <button type="button" class="py-2 px-6 text-sm md:py-3 md:px-8 md:text-base inline-flex items-center justify-center w-full gap-x-2 font-semibold rounded-lg bg-red-600 text-white shadow-lg hover:bg-red-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                <svg class="w-4 h-4 md:w-5 md:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm0-8h2V7h-2v2z"/></svg>
+                Register Here
+            </button>
+        </a>
+        {% endif %}
+
+        {% if event.whatsapp_link %}
+        <a href="{{ event.whatsapp_link }}" target="_blank" class="w-full sm:w-auto max-w-xs md:max-w-sm">
+            <button type="button" class="py-2 px-6 text-sm md:py-3 md:px-8 md:text-base inline-flex items-center justify-center w-full gap-x-2 font-semibold rounded-lg border border-green-600 text-green-600 hover:bg-green-50 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                 <svg class="w-4 h-4 md:w-5 md:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 20.895l1.656-6.096A9.916 9.916 0 0 1 2 12c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10a9.916 9.916 0 0 1-4.8-.973l-6.104 1.658L.057 20.895zM12 20c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm-2.715-4.226c-.16-.073-.974-.476-1.125-.53s-.26-.073-.374.22-.48.53-.587.643-.217.16-.402.053c-1.35-1.125-2.247-2.607-2.977-3.957-.08-.16-.008-.248.065-.313.065-.072.16-.18.232-.27.073-.08.098-.145.16-.255.065-.11.032-.206-.016-.313-.048-.107-.48-.2-.587-.268-.107-.065-.205-.08-.313-.08-.11 0-.232.032-.35.098-.117.065-.303.303-.453.447-.15.152-.313.342-.313.785 0 .44.326.85.374.915.048.065.642 1 .77 1.125.12.12.23.18.42.22.18.04.5.032.842-.213.34-.248.813-.74 1.05-1.006.237-.26.237-.478.16-.607-.07-.13-.26-.205-.41-.275z"/></svg>
+                        Join WhatsApp Group
+                    </button>
+                </a>
+                {% endif %}
+            </div>
+
+            {% if event.whatsapp_link %}
+            <div class="flex items-center justify-center gap-1 -mt-4 mb-4 text-sm text-gray-600">
+                <p>For more details about the event, join the</p>
+                <a href="{{ event.whatsapp_link }}" target="_blank" class="text-green-600 font-medium hover:text-green-700 underline">WhatsApp group.</a>
+            </div>
+            {% endif %}
+
+            <hr class="my-4 border-gray-300">
+
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                <h3 class="font-bold text-xl text-gray-800 mb-3 border-b-2 pb-2 border-red-500">
+                    Coordinators Details 🤝
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                    <p class="text-lg"><strong>Coordinator Name:</strong> <span class="text-red-600 font-semibold">{{ event.coordinator_name|default:'[Not Specified]' }}</span></p>
+                    <p class="text-lg"><strong>Contact Info:</strong> <span class="text-red-600 font-semibold">{{ event.contact_info|default:'[Not Specified]' }}</span></p>
+                </div>
+            </div>
+
+</div>
 </div>
 {% endblock %}

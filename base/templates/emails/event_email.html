@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 
 <head>
@@ -42,4 +42,152 @@
     {% endif %}
 </body>
 
+</html> -->
+
+
+That's an excellent choice\! **Red** is a vibrant, energetic color that immediately grabs attention, making it perfect for a cheerful and modern announcement.
+
+I will update the design by swapping the primary blue (`#007BFF`) with a bold, modern red (`#E74C3C`) and pairing it with a contrasting secondary color (like gold or white) to maintain cheerfulness and readability.
+
+Here is the revised, red-themed HTML email template:
+
+-----
+
+## 🔥 Red-Themed Modern & Cheerful Email Design
+
+This design uses **bright red (`#E74C3C`)** as the primary brand color and a **vibrant gold/yellow (`#F1C40F`)** as the accent color for the key call-to-action buttons.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Event: {{ event.name }}</title>
+    <style>
+        /* General Styles for Readability */
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333333; background-color: #F8F9FA; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 20px auto; padding: 0; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); }
+        
+        /* Red Header Section */
+        .header-section { 
+            background-color: #E74C3C; /* Primary Red */
+            color: #ffffff; 
+            padding: 30px 25px 20px 25px; 
+            text-align: center; 
+        }
+        h2 { 
+            margin-top: 0; 
+            font-size: 26px; 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+        }
+        .headline { 
+            font-size: 17px; 
+            margin-bottom: 0; 
+            opacity: 0.95; 
+            font-weight: 300;
+        }
+        
+        .content-section { padding: 25px 30px; }
+        
+        /* Key Details Section - Clean Block */
+        .key-details { 
+            background-color: #FEF3F2; /* Very Light Red/Pink */
+            border-left: 5px solid #E74C3C; 
+            padding: 15px; 
+            margin-bottom: 25px; 
+            border-radius: 6px; 
+        }
+        .detail-row { margin-bottom: 12px; font-size: 15px; }
+        .detail-label { font-weight: 700; color: #E74C3C; display: inline-block; min-width: 100px; }
+
+        /* Primary Call-to-Action (CTA) Button - Gold/Yellow Accent */
+        .action-button a { 
+            display: block; 
+            background-color: #F1C40F; /* Vibrant Gold/Yellow Accent */
+            color: #212529 !important; /* Dark text for contrast */
+            padding: 16px 20px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-weight: 800; 
+            font-size: 19px; 
+            margin: 20px 0; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        }
+        
+        /* Secondary CTA (WhatsApp) - Green */
+        .action-button.whatsapp a { 
+            background-color: #25D366; 
+            color: #ffffff !important; 
+            font-weight: 600;
+        }
+        
+        .coordinator-info { padding: 15px; background-color: #F7F7F7; border-radius: 4px; margin-top: 20px; border: 1px dashed #DDD; }
+        .poster-image { max-width: 100%; height: auto; display: block; margin: 15px auto; border-radius: 8px; }
+        h3 { color: #E74C3C; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header-section">
+            <p style="font-size: 19px; font-weight: 500; margin: 0 0 10px 0;">🔴 Don't Miss Out! A Fresh New Event Is Here! 🔴</p>
+            <h2>{{ event.name }}</h2>
+            <p class="headline">{{ event.headline }}</p>
+        </div>
+
+        {% if event.poster %}
+        <p style="padding: 10px 20px 0 20px; text-align: center;">
+            <img src="cid:poster" alt="Event Poster" class="poster-image" style="max-width: 450px;">
+        </p>
+        {% endif %}
+
+        <div class="content-section">
+            {% if event.registration_link %}
+            <p class="action-button">
+                <a href="{{ event.registration_link }}">
+                    ✨ Register Here Before {{ event.deadline }}!
+                </a>
+            </p>
+            {% endif %}
+            
+            <div class="key-details">
+                <p style="font-size: 18px; font-weight: 700; color: #E74C3C; margin-top: 0; border-bottom: 2px solid #F1C40F; padding-bottom: 5px;">Event Snapshot</p>
+                <div class="detail-row"><span class="detail-label">🗓️ Date:</span> **{{ event.day }}** at **{{ event.time }}**</div>
+                <div class="detail-row"><span class="detail-label">📍 Venue:</span> {{ event.venue }}</div>
+                <div class="detail-row"><span class="detail-label">🏛️ Department:</span> {{ event.department }}</div>
+                <div class="detail-row"><span class="detail-label">🏷️ Category:</span> {{ event.category }}</div>
+            </div>
+
+            <h3 style="margin-top: 30px;">What's It All About?</h3>
+            <p>{{ event.description }}</p>
+
+            <h3>How To Participate & Rules</h3>
+            <p>{{ event.rules }}</p>
+
+            <div class="coordinator-info">
+                <p style="font-weight: 700; color: #555;">Need a hand?</p>
+                <p style="margin: 5px 0;"><span style="font-weight: 600;">👤 Coordinator:</span> {{ event.coordinator_name }}</p>
+                <p style="margin: 5px 0;"><span style="font-weight: 600;">📞 Contact Info:</span> {{ event.contact_info }}</p>
+            </div>
+
+            {% if event.whatsapp_link %}
+            <p class="action-button whatsapp">
+                <a href="{{ event.whatsapp_link }}">
+                    💬 Join the Official WhatsApp Group for Updates
+                </a>
+            </p>
+            {% endif %}
+        </div>
+
+        <div style="text-align: center; padding: 20px; font-size: 12px; color: #777; background-color: #EDEDED; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;">
+            <p style="margin: 0;">We can't wait to see you! | &copy; University Events Team</p>
+        </div>
+
+    </div>
+</body>
 </html>
+```
